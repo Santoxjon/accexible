@@ -1,0 +1,13 @@
+.mockupMobile{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+#mockupApp{
+    height:540px;
+    width:360px;
+    border-radius: 3px;
+    border: solid 1px red;
+}
