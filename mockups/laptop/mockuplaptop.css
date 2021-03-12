@@ -1,0 +1,51 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 10px 0;
+  height: 100vh;
+}
+
+.mockupLaptop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mockupApp {
+  height: 100vh;
+  width: 769px;
+  border-radius: 10px;
+  border: solid 1px red;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background-color: bisque;
+}
+.mockupHeader {
+  display: flex;
+  background-color: blueviolet;
+  justify-content: space-around;
+}
+.mockupHeader-left {
+  text-align: left;
+}
+#mockupMain {
+  /* padding: 2rem; */
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#mockupMain > div {
+  display: flex;
+  flex-direction: column;
+}
+#mockupFooter {
+  text-align: center;
+  background-color: coral;
+  padding: 1rem;
+}
+input {
+  height: 5vh;
+}
