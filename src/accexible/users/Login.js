@@ -37,7 +37,7 @@ function Login() {
             .then(data => {
                 if (data.status === 0) {
                     localStorage.setItem("user", newUsername)
-                    window.location = "/"
+                    window.location = "/";
                 } else if (data.status === 1) {
                     setLoginMessageAlert("Contraseña incorrecta")
                 } else {
