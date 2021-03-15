@@ -6,7 +6,8 @@ import React, { useState } from 'react';
 function Login() {
     const [newUsername, setNewUsername] = useState("");
     const [newUsernamePassword, setNewUsernamePassword] = useState("");
-
+    const [loginMessageAlert, setLoginMessageAlert] = useState("");
+    
     function readUsername(event) {
         setNewUsername(event.target.value)
     }
@@ -14,8 +15,6 @@ function Login() {
     function readUsernamePassword(event) {
         setNewUsernamePassword(event.target.value)
     }
-
-
 
     function introduceNewUser(e) {
         e.preventDefault();
@@ -36,8 +35,17 @@ function Login() {
         fetch('http://localhost:9000/users/login', fetchNewUser)
             .then(respuesta => respuesta.json())
             .then(data => {
-                alert(data.mensaje)
+                if (data.status === 0) {
+                    localStorage.setItem("user", newUsername)
+                    window.location = "/"
+                } else if (data.status === 1) {
+                    setLoginMessageAlert("Contraseña incorrecta")
+                } else {
+                    setLoginMessageAlert("Usuario no existente")
+                }
             })
+
+
     }
 
 
@@ -47,8 +55,8 @@ function Login() {
             <Form.Group controlId="formBasicEmail">
                 <Form.Label size="lg">Dirección de correo</Form.Label>
                 <Form.Control name="email" value={newUsername} onChange={readUsername} size="lg" type="email" placeholder="Introduce tu correo electrónico" />
-                <Form.Text className="text-muted">
-
+                <Form.Text className="text-alert">
+                    {loginMessageAlert}
                 </Form.Text>
             </Form.Group>
 
