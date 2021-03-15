@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import Login from './users/Login';
 
 import Login from './users/Login';
 
@@ -12,6 +13,9 @@ function Main() {
                 <Route exact path="/login">
                     <Login />
                 </Route>
+                {/* <Route exact path="/register">
+                    <Register />
+                </Route> */}
             </BrowserRouter>
         </main>
     )
