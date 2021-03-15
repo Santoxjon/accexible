@@ -2,27 +2,28 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from './../logo_accexible.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {Link} from 'react-router-dom';
 
 
 function Header() {
-    const logeado = true;
+    const logeado = false;
 
     function ControlPanel() {
         if (!logeado) {
             return (
                 <Nav className="ml-auto">
-                    <Nav.Link href="/login">Iniciar sesión</Nav.Link>
-                    <Nav.Link href="/register">Registrarse</Nav.Link>
+                    <Link className="nav-link" to="/login">Iniciar sesión</Link>
+                    <Link className="nav-link" to="/register">Registrarse</Link>
                 </Nav>
             )
         }
         return (
             <Nav className="ml-auto">
-                <Nav.Link href="#">Ver resultados</Nav.Link>
-                <Nav.Link href="#">Test</Nav.Link>
-                <Nav.Link href="#">Chatbot</Nav.Link>
-                <Nav.Link href="#">Ver perfil</Nav.Link>
-                <Nav.Link href="/logout">Cerrar sesión</Nav.Link>
+                <Link to="#">Ver resultados</Link>
+                <Link to="#">Test</Link>
+                <Link to="#">Chatbot</Link>
+                <Link to="#">Ver perfil</Link>
+                <Link to="/logout">Cerrar sesión</Link>
             </Nav>
         )
     }
@@ -30,9 +31,9 @@ function Header() {
     return (
         <header>
             <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-                <Navbar.Brand href="#home">
+                <Link to="/">
                     <img src={logo} alt="logo" />
-                </Navbar.Brand>
+                </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <ControlPanel />
