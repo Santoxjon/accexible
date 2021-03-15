@@ -8,7 +8,6 @@ function Site() {
         <>
             <Header />
             <Main />
-            <Login />
             <Footer />
         </>
     )
