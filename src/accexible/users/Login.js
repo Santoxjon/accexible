@@ -51,22 +51,22 @@ function Login() {
 
     return (
         // <Form method="POST" action="http://localhost:9000/users/login">
-        <Form onSubmit={introduceNewUser}>
+        <Form id="loginForm" onSubmit={introduceNewUser}>
             <Form.Group controlId="formBasicEmail">
-                <Form.Label size="lg">Dirección de correo</Form.Label>
-                <Form.Control name="email" value={newUsername} onChange={readUsername} size="lg" type="email" placeholder="Introduce tu correo electrónico" />
+                <Form.Label>Dirección de correo</Form.Label>
+                <Form.Control required name="email" value={newUsername} onChange={readUsername} type="email" placeholder="Introduce tu correo electrónico" />
                 <Form.Text className="text-alert">
                     {loginMessageAlert}
                 </Form.Text>
             </Form.Group>
 
             <Form.Group controlId="formBasicPassword">
-                <Form.Label size="lg" >Introduce tu contraseña</Form.Label>
-                <Form.Control name="password" value={newUsernamePassword} size="lg" onChange={readUsernamePassword} type="password" placeholder="Contraseña" />
+                <Form.Label>Introduce tu contraseña</Form.Label>
+                <Form.Control required name="password" value={newUsernamePassword} onChange={readUsernamePassword} type="password" placeholder="Contraseña" />
             </Form.Group>
 
             <Button variant="primary" type="submit">
-                Enviar
+                Entrar
             </Button>
         </Form>
     )
