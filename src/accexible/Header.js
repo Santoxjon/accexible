@@ -1,6 +1,6 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import logo from './../logo_accexible.png'
+import logo from './../logo_accexible.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
