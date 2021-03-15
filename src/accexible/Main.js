@@ -1,14 +1,19 @@
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import Login from './users/Login';
+import Register from './users/Register';
 
 function Main() {
     return (
-        <BrowserRouter>
+        <main>
             <Route exact path="/">
                 <p>Main</p>
             </Route>
-
-        </BrowserRouter>
+            <Route exact path="/login">
+                <Login />
+            </Route>
+            <Route exact path="/register">
+                    <Register />
+            </Route>
+        </main>
     )
-}
-
-export default Main;
+} export default Main;

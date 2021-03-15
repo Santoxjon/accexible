@@ -1,6 +1,8 @@
 function Footer() {
     return (
-        <p>Footer</p>
+        <footer class="bg-light">
+            <p>Una aplicación de <a href="https://accexible.com" target="_blank">acceXible</a></p>
+        </footer>
     )
 }
 

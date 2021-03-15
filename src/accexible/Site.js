@@ -1,16 +1,15 @@
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
-import Register from './users/Register'
+import { BrowserRouter } from 'react-router-dom';
 
 function Site() {
     return (
-        <>
+        <BrowserRouter>
             <Header />
             <Main />
             <Footer />
-            <Register />
-        </>
+        </BrowserRouter>
     )
 }
 
