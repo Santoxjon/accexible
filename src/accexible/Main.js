@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Login from './users/Login';
 
+import Login from './users/Login';
+
 function Main() {
     return (
         <main>
@@ -17,6 +19,4 @@ function Main() {
             </BrowserRouter>
         </main>
     )
-}
-
-export default Main;
+}export default Main;
