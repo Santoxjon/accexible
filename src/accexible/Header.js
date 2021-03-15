@@ -1,40 +1,50 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import logo from './../logo_accexible.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {Link} from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 function Header() {
-    const logeado = false;
+    const [logeado, setLogeado] = useState(localStorage.getItem("user") ? true : false)
+    const [expanded, setExpanded] = useState(false);
+
+    function collapseNav() {
+        setTimeout(() => { setExpanded(false) }, 150);
+    }
+
+    function logout() {
+        collapseNav();
+        localStorage.removeItem("user");
+        setLogeado(false);
+    }
 
     function ControlPanel() {
         if (!logeado) {
             return (
                 <Nav className="ml-auto">
-                    <Link className="nav-link" to="/login">Iniciar sesión</Link>
-                    <Link className="nav-link" to="/register">Registrarse</Link>
+                    <Link onClick={collapseNav} className="nav-link" to="/login">Iniciar sesión</Link>
+                    <Link onClick={collapseNav} className="nav-link" to="/register">Registrarse</Link>
                 </Nav>
             )
         }
         return (
             <Nav className="ml-auto">
-                <Link to="#">Ver resultados</Link>
-                <Link to="#">Test</Link>
-                <Link to="#">Chatbot</Link>
-                <Link to="#">Ver perfil</Link>
-                <Link to="/logout">Cerrar sesión</Link>
+                <Link onClick={collapseNav} className="nav-link" to="#">Test</Link>
+                <Link onClick={collapseNav} className="nav-link" to="#">Chatbot</Link>
+                <Link onClick={collapseNav} className="nav-link" to="#">Ver perfil</Link>
+                <Link onClick={collapseNav} className="nav-link" to="#">Resultados</Link>
+                <Link onClick={logout} className="nav-link" to="/">Cerrar sesión</Link>
             </Nav>
         )
     }
 
     return (
         <header>
-            <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-                <Link to="/">
+            <Navbar collapseOnSelect expand="lg" bg="light" variant="light" expanded={expanded}>
+                <Link onClick={collapseNav} to="/">
                     <img src={logo} alt="logo" />
                 </Link>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <ControlPanel />
                 </Navbar.Collapse>
