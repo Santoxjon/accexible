@@ -66,6 +66,7 @@ function Login() {
     return (
         // <Form method="POST" action="http://localhost:9000/users/login">
         <Form id="loginForm" onSubmit={introduceNewUser}>
+            <h1>Iniciar Sesión</h1>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Dirección de correo</Form.Label>
                 <Form.Control required name="email" value={newUsername} onChange={readUsername} type="email" placeholder="Introduce tu correo electrónico" />

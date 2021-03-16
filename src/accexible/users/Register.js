@@ -4,14 +4,16 @@ import { useEffect, useState } from "react";
 
 function Register() {
 
-    let [newName, setName] = useState("");
-    let [newEmail, setEmail] = useState("");
-    let [newPass, setPass] = useState("");
-    let [passRep, setPassRep] = useState("");
-    let [buttonStatus, setButtonStatus] = useState()
-    let [errorLength, setErrorLength] = useState("")
-    let [errorNumber, setErrorNumber] = useState("")
-    let [errorMayus, setErrorMayus] = useState("")
+    const [newName, setName] = useState("");
+    const [newEmail, setEmail] = useState("");
+    const [newPass, setPass] = useState("");
+    const [passRep, setPassRep] = useState("");
+    const [errorLength, setErrorLength] = useState("");
+    const [errorNumber, setErrorNumber] = useState("");
+    const [errorMayus, setErrorMayus] = useState("");
+    const [passwordsMatch, setPasswordsMatch] = useState(false);
+    const [passwordIsValid, setPasswordIsValid] = useState(false);
+    const buttonStatus = !(passwordsMatch && passwordIsValid);
 
     function setValues(event) {
         switch (event.target.id) {
@@ -31,27 +33,29 @@ function Register() {
                 break;
         }
     }
-
     useEffect(() => {
         if (passRep === newPass) {
-            setButtonStatus(false);
+            setPasswordsMatch(true);
         } else {
-            setButtonStatus(true)
+            setPasswordsMatch(false);
         }
-    }, [passRep])
+    }, [passRep, newPass])
 
     useEffect(() => {
+        let regExNumber = new RegExp(/\d/)
+        let regExCapital = new RegExp(/[A-Z]/);
+        let regExLength = new RegExp(/^([a-zA-Z0-9_-]){8,20}$/);
+        let regExFull = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/)
 
-        let regExNumber = new RegExp(/[0-9]/, 'g')  //must contain one digit from 0-9
-        let regExCapital = new RegExp(/[A-Z]/, 'g') //must contain 1 character from A-Z
-
-        if ((newPass.length > 7 && newPass.length < 21) && regExNumber.test(newPass) && regExCapital.test(newPass)) {
-            setButtonStatus(false);
+        if (regExFull.test(newPass)) {
+            setPasswordIsValid(true);
             setErrorLength("");
+            setErrorNumber("");
+            setErrorMayus("");
         }
         else {
-            setButtonStatus(true);
-            if (!(newPass.length > 7 && newPass.length < 21)) {
+            setPasswordIsValid(false);
+            if (!regExLength.test(newPass)) {
                 setErrorLength("Contraseña entre 8 y 20 caracteres.");
             }
             else {
@@ -61,6 +65,7 @@ function Register() {
                 setErrorNumber("Mínimo 1 número");
             }
             else {
+                console.log("Ya hay un número");
                 setErrorNumber("");
             }
             if (!regExCapital.test(newPass)) {
@@ -75,7 +80,7 @@ function Register() {
     return (
         <>
             <Form id="registerForm" action="http://localhost:9000/users/register" method="POST">
-
+                <h1>Registro</h1>
                 <Form.Group>
                     <Form.Label>Nombre y apellidos</Form.Label>
                     <Form.Control type="text" placeholder="Andoni Martínez de la Pera" required value={newName} id="inputname" name="name" onChange={setValues} />
@@ -86,21 +91,21 @@ function Register() {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Contraseña</Form.Label>
-                    <Form.Control type="password" placeholder="Contraseña" required value={newPass} id="inputpassword" name="password" onChange={setValues} />
-                    <Form.Text className="text-muted" >
+                    <Form.Control type="text" placeholder="Contraseña" required value={newPass} id="inputpassword" name="password" onChange={setValues} />
+                    <Form.Text className="text-alert" >
                         {errorLength}
                     </Form.Text>
-                    <Form.Text className="text-muted">
+                    <Form.Text className="text-alert">
                         {errorMayus}
                     </Form.Text>
-                    <Form.Text className="text-muted">
+                    <Form.Text className="text-alert">
                         {errorNumber}
                     </Form.Text>
                 </Form.Group>
 
                 <Form.Group>
                     <Form.Label>Repetir Contraseña</Form.Label>
-                    <Form.Control type="password" placeholder="Repetir contraseña" required id="inputreppassword" value={passRep} onChange={setValues} />
+                    <Form.Control type="text" placeholder="Repetir contraseña" required id="inputreppassword" value={passRep} onChange={setValues} />
                 </Form.Group>
 
                 <Button type="submit" disabled={buttonStatus} >

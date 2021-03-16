@@ -1,40 +1,37 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect } from 'react';
-import { getCookie, deleteCookie } from '../Functions';
+import { getCookie } from '../Functions';
 import { Redirect } from 'react-router-dom';
 
 function UserDetails() {
+    const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
+    const [newUsername, setNewUsername] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+    const [oldEmail, setOldEmail] = useState("")
+    const [emailError, setEmailError] = useState("");
+    const btnStatus = emailError === "" ? false : true;
 
-    const [userCookie, setUserCookie] = useState({ userId: getCookie("userId"), loginToken: getCookie("loginToken") });
-    const [usernameEdit, setUsernameEdit] = useState("");
-    const [userEmailEdit, setUserEmailEdit] = useState("");
-    const [usernameChange, setUsernameChange] = useState("");
-    const [userEmailChange, setUserEmailChange] = useState("");
-    const [userIdEdit, setUserIdEdit] = useState("");
-    const [userPasswordEdit, setUserPasswordEdit] = useState("");
-    const [userPasswordChange, setUserPasswordChange] = useState("");
+    useEffect(() => {
+        fetch(`http://localhost:9000/users/checkToken?id=${userCookie.userId}&token=${userCookie.loginToken}`)
+            .then(res => res.json())
+            .then(res => {
+                setNewUsername(res.name);
+                setOldEmail(res.email);
+                setNewEmail(res.email);
+            });
+    }, []);
 
-    function readUsernameEdit(event) {
-            setUsernameChange(event.target.value)      
-        }
+    useEffect(() => {
+        checkEmail();
+    }, [newEmail])
 
-    function readUserEmailEdit(event) {       
-            setUserEmailChange(event.target.value)
-    }
-
-    function readUserPasswordEdit(event) {
-        setUserPasswordChange(event.target.value)
-    }
-
-    function editUser(e) {
+    function updateUser(e) {
         e.preventDefault();
-        console.log(usernameChange, userEmailChange)
         var editOldUser = {
-            name: usernameChange,
-            email: userEmailChange,
-            password: userPasswordChange,
-            id: userIdEdit
+            name: newUsername,
+            email: newEmail,
+            id: userCookie.userId
         }
 
         var fetchOldUser = {
@@ -45,77 +42,51 @@ function UserDetails() {
             }
         }
 
-        fetch(`http://localhost:9000/users/updateuser?userId=${userCookie.userId}&loginToken=${userCookie.loginToken}`, fetchOldUser)
-            .then(respuesta => respuesta.json())
-            .then((data => console.log(data)))
+        fetch(`http://localhost:9000/users/updateUser`, fetchOldUser)
+            .then(res => res.json())
+            .then(() => {
+                window.location = "/profile"
+            });
     }
 
-    useEffect(() => {
-        console.log(userCookie)
-        fetch(`http://localhost:9000/users/checkloggeduser?userId=${userCookie.userId}&loginToken=${userCookie.loginToken}`)
-            .then(res => res.json())
-            .then(res => {
-                setUsernameEdit(res.name)
-                setUserEmailEdit(res.email)
-                setUserIdEdit(res._id)
-                setUserPasswordEdit(res.password)
-            }
-            )
-    }, [])
-
-    useEffect(() => {
-
-        let regExNumber = new RegExp(/[0-9]/, 'g')  //must contain one digit from 0-9
-        let regExCapital = new RegExp(/[A-Z]/, 'g') //must contain 1 character from A-Z
-
-        if ((userPasswordEdit.length > 7 && userPasswordEdit.length < 21) && regExNumber.test(userPasswordEdit) && regExCapital.test(userPasswordEdit)) {
-
+    function checkEmail(e) {
+        if (oldEmail === newEmail) {
+            setEmailError("");
         }
         else {
-
-            if (!(userPasswordEdit.length > 7 && userPasswordEdit.length < 21)) {
-
-            }
-            else {
-
-            }
-            if (!regExNumber.test(userPasswordEdit)) {
-
-            }
-            else {
-
-            }
-            if (!regExCapital.test(userPasswordEdit)) {
-
-            }
-            else {
-
-            }
+            fetch(`http://localhost:9000/users/checkEmail?email=${newEmail}`)
+                .then(res => res.json())
+                .then((user) => {
+                    if (user) {
+                        setEmailError("Email en uso")
+                    }
+                    else {
+                        setEmailError("")
+                    }
+                });
         }
-    }, [userPasswordEdit])
+    }
 
     if (userCookie.userId && userCookie.loginToken) {
 
         return (
             <>
-                <Form id="updateForm" onSubmit={editUser}>
+                <Form id="updateForm" onSubmit={updateUser}>
+                    <h1>Detalles del perfil</h1>
                     <Form.Group>
                         <Form.Label>Nombre y apellidos</Form.Label>
-                        <Form.Control required type="text" placeholder={usernameEdit} id="inputname" name="name" onChange={readUsernameEdit} />
-                      
+                        <Form.Control type="text" value={newUsername} id="inputname" name="name" onChange={(e) => setNewUsername(e.target.value)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control required type="email" placeholder={userEmailEdit} id="inputemail" name="email" onChange={readUserEmailEdit} />
-                       
+                        <Form.Control type="email" value={newEmail} id="inputemail" name="email" onChange={(e) => setNewEmail(e.target.value)} />
+                        <Form.Text className="text-alert" >
+                            {emailError}
+                        </Form.Text>
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Contraseña</Form.Label>
-                        <Form.Control required type="password" id="inputpassword" name="password" onChange={readUserPasswordEdit} />
-                    </Form.Group>
-                    <Button variant="primary" type="submit" >
-                        Enviar
-                </Button>
+                    <Button type="submit" disabled={btnStatus}>
+                        Actualizar
+                    </Button>
                 </Form>
             </>
         )

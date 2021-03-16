@@ -31,7 +31,6 @@ function Header() {
                     .then(res => res.json())
                     .then(res => setLogged(res));
             }
-            setLogged(undefined);
         }
         checkLoginToken();
     }, [])
