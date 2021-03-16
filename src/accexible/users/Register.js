@@ -40,40 +40,36 @@ function Register() {
         }
     }, [passRep])
 
-
-    /* comprobacion campos  */
     useEffect(() => {
 
-        let regExNumber = new RegExp(/[0-9]/, 'g') //must contain one digit from 0-9
+        let regExNumber = new RegExp(/[0-9]/, 'g')  //must contain one digit from 0-9
         let regExCapital = new RegExp(/[A-Z]/, 'g') //must contain 1 character from A-Z
 
-        if ((newPass.length > 7 && newPass.length<21) && regExNumber.test(newPass) && regExCapital.test(newPass)) {
+        if ((newPass.length > 7 && newPass.length < 21) && regExNumber.test(newPass) && regExCapital.test(newPass)) {
             setButtonStatus(false);
+            setErrorLength("");
         }
         else {
             setButtonStatus(true);
-            if (!(newPass.length > 7 && newPass.length<21)) {
-               setErrorLength("Contraseña entre 8 y 20 caracteres.");
+            if (!(newPass.length > 7 && newPass.length < 21)) {
+                setErrorLength("Contraseña entre 8 y 20 caracteres.");
             }
-            else{
+            else {
                 setErrorLength("");
             }
-
             if (!regExNumber.test(newPass)) {
                 setErrorNumber("Mínimo 1 número");
             }
-            else{
+            else {
                 setErrorNumber("");
             }
-
             if (!regExCapital.test(newPass)) {
                 setErrorMayus("Mínimo 1 mayúscula");
             }
-            else{
+            else {
                 setErrorMayus("");
             }
         }
-
     }, [newPass])
 
     return (
@@ -95,10 +91,10 @@ function Register() {
                         {errorLength}
                     </Form.Text>
                     <Form.Text className="text-muted">
-                       {errorMayus}
+                        {errorMayus}
                     </Form.Text>
                     <Form.Text className="text-muted">
-                       {errorNumber} 
+                        {errorNumber}
                     </Form.Text>
                 </Form.Group>
 
