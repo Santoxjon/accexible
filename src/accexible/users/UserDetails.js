@@ -63,6 +63,37 @@ function editUser(e) {
             )
     }, [])
 
+    useEffect(() => {
+
+        let regExNumber = new RegExp(/[0-9]/, 'g')  //must contain one digit from 0-9
+        let regExCapital = new RegExp(/[A-Z]/, 'g') //must contain 1 character from A-Z
+
+        if ((userPasswordEdit.length > 7 && userPasswordEdit.length < 21) && regExNumber.test(userPasswordEdit) && regExCapital.test(userPasswordEdit)) {
+            
+        }
+        else {
+           
+            if (!(userPasswordEdit.length > 7 && userPasswordEdit.length < 21)) {
+                
+            }
+            else {
+                
+            }
+            if (!regExNumber.test(userPasswordEdit)) {
+              
+            }
+            else {
+              
+            }
+            if (!regExCapital.test(userPasswordEdit)) {
+               
+            }
+            else {
+                
+            }
+        }
+    }, [userPasswordEdit])
+
     if (userCookie.userId && userCookie.loginToken) {
 
         return (
