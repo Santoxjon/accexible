@@ -11,17 +11,17 @@ function Register() {
     let [buttonStatus, setButtonStatus] = useState()
 
     function setValues(event) {
-        switch (event.target.name) {
-            case "name":
+        switch (event.target.id) {
+            case "inputname":
                 setName(event.target.value);
                 break;
-            case "email":
+            case "inputemail":
                 setEmail(event.target.value);
                 break;
-            case "password":
+            case "inputpassword":
                 setPass(event.target.value);
                 break;
-            case "passwordrep":
+            case "inputreppassword":
                 setPassRep(event.target.value);
                 break;
             default:
@@ -43,15 +43,15 @@ function Register() {
 
                 <Form.Group>
                     <Form.Label>Nombre y apellidos</Form.Label>
-                    <Form.Control type="text" placeholder="Andoni Martínez de la Pera" required value={newName} name="name" onChange={setValues} />
+                    <Form.Control type="text" placeholder="Andoni Martínez de la Pera" required value={newName} id="inputname" name="name" onChange={setValues} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="prueba@mail.com" required value={newEmail} name="email" onChange={setValues} />
+                    <Form.Control type="email" placeholder="prueba@mail.com" required value={newEmail} id="inputemail" name="email" onChange={setValues} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Contraseña</Form.Label>
-                    <Form.Control type="password" placeholder="Contraseña" required value={newPass} name="password" onChange={setValues} />
+                    <Form.Control type="password" placeholder="Contraseña" required value={newPass} id="inputpassword" name="password" onChange={setValues} />
                     <Form.Text className="text-muted">
                         Mínimo 8 caracteres.
                     </Form.Text>
@@ -68,7 +68,7 @@ function Register() {
 
                 <Form.Group>
                     <Form.Label>Repetir Contraseña</Form.Label>
-                    <Form.Control type="password" placeholder="Repetir contraseña" required value={passRep} name="passwordrep" onChange={setValues} />
+                    <Form.Control type="password" placeholder="Repetir contraseña" required id="inputreppassword" value={passRep} onChange={setValues} />
                 </Form.Group>
                 
                 <Button type="submit" disabled={buttonStatus} >
