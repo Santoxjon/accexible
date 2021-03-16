@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom';
 import Login from './users/Login';
 import Register from './users/Register';
+import UserDetails from './users/UserDetails';
 
 function Main() {
     return (
@@ -13,6 +14,9 @@ function Main() {
             </Route>
             <Route exact path="/register">
                 <Register />
+            </Route>
+            <Route exact path="/userdetails">
+                <UserDetails />
             </Route>
         </main>
     )
