@@ -9,6 +9,9 @@ function Register() {
     let [newPass, setPass] = useState("");
     let [passRep, setPassRep] = useState("");
     let [buttonStatus, setButtonStatus] = useState()
+    let [errorLength, setErrorLength] = useState("")
+    let [errorNumber, setErrorNumber] = useState("")
+    let [errorMayus, setErrorMayus] = useState("")
 
     function setValues(event) {
         switch (event.target.id) {
@@ -37,6 +40,42 @@ function Register() {
         }
     }, [passRep])
 
+
+    /* comprobacion campos  */
+    useEffect(() => {
+
+        let regExNumber = new RegExp(/[0-9]/, 'g') //must contain one digit from 0-9
+        let regExCapital = new RegExp(/[A-Z]/, 'g') //must contain 1 character from A-Z
+
+        if ((newPass.length > 7 && newPass.length<21) && regExNumber.test(newPass) && regExCapital.test(newPass)) {
+            setButtonStatus(false);
+        }
+        else {
+            setButtonStatus(true);
+            if (!(newPass.length > 7 && newPass.length<21)) {
+               setErrorLength("Contraseña entre 8 y 20 caracteres.");
+            }
+            else{
+                setErrorLength("");
+            }
+
+            if (!regExNumber.test(newPass)) {
+                setErrorNumber("Mínimo 1 número");
+            }
+            else{
+                setErrorNumber("");
+            }
+
+            if (!regExCapital.test(newPass)) {
+                setErrorMayus("Mínimo 1 mayúscula");
+            }
+            else{
+                setErrorMayus("");
+            }
+        }
+
+    }, [newPass])
+
     return (
         <>
             <Form id="registerForm" action="http://localhost:9000/users/register" method="POST">
@@ -52,17 +91,14 @@ function Register() {
                 <Form.Group>
                     <Form.Label>Contraseña</Form.Label>
                     <Form.Control type="password" placeholder="Contraseña" required value={newPass} id="inputpassword" name="password" onChange={setValues} />
-                    <Form.Text className="text-muted">
-                        Mínimo 8 caracteres.
+                    <Form.Text className="text-muted" >
+                        {errorLength}
                     </Form.Text>
                     <Form.Text className="text-muted">
-                        Máximo 20 caracteres.
+                       {errorMayus}
                     </Form.Text>
                     <Form.Text className="text-muted">
-                        Mínimo 1 número.
-                    </Form.Text>
-                    <Form.Text className="text-muted">
-                        Mínimo 1 mayúscula.
+                       {errorNumber} 
                     </Form.Text>
                 </Form.Group>
 
@@ -70,7 +106,7 @@ function Register() {
                     <Form.Label>Repetir Contraseña</Form.Label>
                     <Form.Control type="password" placeholder="Repetir contraseña" required id="inputreppassword" value={passRep} onChange={setValues} />
                 </Form.Group>
-                
+
                 <Button type="submit" disabled={buttonStatus} >
                     Enviar
                 </Button>
