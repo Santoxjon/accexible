@@ -1,13 +1,14 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
+import {setCookie} from '../Functions';
 
 
 function Login() {
     const [newUsername, setNewUsername] = useState("");
     const [newUsernamePassword, setNewUsernamePassword] = useState("");
     const [loginMessageAlert, setLoginMessageAlert] = useState("");
-    
+
     function readUsername(event) {
         setNewUsername(event.target.value)
     }
@@ -36,7 +37,8 @@ function Login() {
             .then(respuesta => respuesta.json())
             .then(data => {
                 if (data.status === 0) {
-                    localStorage.setItem("user", newUsername)
+                    setCookie("userId", data.user._id, 1);
+                    setCookie("loginToken", data.user.loginToken, 1);
                     window.location = "/";
                 } else if (data.status === 1) {
                     setLoginMessageAlert("Contraseña incorrecta")
@@ -44,10 +46,7 @@ function Login() {
                     setLoginMessageAlert("Usuario no existente")
                 }
             })
-
-
     }
-
 
     return (
         // <Form method="POST" action="http://localhost:9000/users/login">

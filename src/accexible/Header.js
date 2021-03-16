@@ -3,9 +3,12 @@ import Nav from 'react-bootstrap/Nav';
 import logo from './../logo_accexible.png';
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
+import { getCookie, deleteCookie } from './Functions';
 
 function Header() {
-    const [logeado, setLogeado] = useState(localStorage.getItem("user") ? true : false)
+    //const [logeado, setLogeado] = useState(localStorage.getItem("user") ? true : false)
+    const [cookieUser, setCookieUser] = useState(getCookie("userId"))
+    const [cookieToken, setCookieToken] = useState(getCookie("loginToken"))
     const [expanded, setExpanded] = useState(false);
 
     function collapseNav() {
@@ -14,12 +17,14 @@ function Header() {
 
     function logout() {
         collapseNav();
-        localStorage.removeItem("user");
-        setLogeado(false);
+        setCookieUser(undefined);
+        setCookieToken(undefined);
+        deleteCookie("userId")
+        deleteCookie("loginToken")
     }
 
     function ControlPanel() {
-        if (!logeado) {
+        if (!cookieUser || !cookieToken) {
             return (
                 <Nav className="ml-auto">
                     <Link onClick={collapseNav} className="nav-link" to="/login">Iniciar sesión</Link>
