@@ -1,6 +1,7 @@
 import { Route } from 'react-router-dom';
 import Login from './users/Login';
 import Register from './users/Register';
+import Test from './users/Test';
 import UserDetails from './users/UserDetails';
 
 function Main() {
@@ -15,7 +16,10 @@ function Main() {
             <Route exact path="/register">
                 <Register />
             </Route>
-            <Route exact path="/userdetails">
+            <Route exact path="/test">
+                <Test />
+            </Route>
+            <Route exact path="/profile">
                 <UserDetails />
             </Route>
         </main>
