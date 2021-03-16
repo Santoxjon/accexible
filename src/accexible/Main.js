@@ -12,7 +12,7 @@ function Main() {
                 <Login />
             </Route>
             <Route exact path="/register">
-                    <Register />
+                <Register />
             </Route>
         </main>
     )
