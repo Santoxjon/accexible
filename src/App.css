@@ -12,11 +12,28 @@
   box-shadow: 0px 0px 15px 5px #515fc9;
 }
 
-header {}
-
 header img {
   width: 7.75em;
   object-fit: cover;
+}
+
+#welcomeContainer {
+  color: #515fc9;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+#welcomeContainer > span:first-child {
+  font-size: .7rem;
+  text-align: right;
+}
+
+#welcomeUser {
+  font-size: 1rem;
+  line-height: .7;
+  font-weight: 600;
 }
 
 .nav-link {
@@ -94,5 +111,13 @@ footer a {
 @media screen and (min-width: 922px) {
   #loginForm, #registerForm {
     width: 45%;
+  }
+  .navbar-collapse {
+    flex-grow: unset !important;
+  }
+  #welcomeContainer {
+    margin-right: .5rem;
+    padding-right: 1rem;
+    border-right: #515fc9 1px solid;
   }
 }
