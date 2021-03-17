@@ -50,7 +50,7 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm, #updateForm {
+#loginForm, #registerForm, #updateForm, #testContainer {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -74,9 +74,30 @@ small {
   font-weight: 500;
 }
 
+#moveTestBtns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+#btnBack, #btnNext {
+  width: 40%;
+}
+
 button[type=submit] {
   float: right;
   padding: .375rem 2rem;
+}
+
+#questionBeginning {
+  font-weight: 500;
+}
+
+#testOptionContainer {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: .35rem;
+  padding-bottom: 1rem;
 }
 
 footer {
