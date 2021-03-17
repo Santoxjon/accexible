@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState, useEffect } from 'react';
 import { getCookie } from '../Functions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 function UserDetails() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
@@ -84,6 +84,7 @@ function UserDetails() {
                             {emailError}
                         </Form.Text>
                     </Form.Group>
+                    <Link to="/changePassword">¿Quieres cambiar tu contraseña?</Link>
                     <Button type="submit" disabled={btnStatus}>
                         Actualizar
                     </Button>

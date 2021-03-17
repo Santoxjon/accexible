@@ -50,7 +50,7 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm, #updateForm {
+#loginForm, #registerForm, #updateForm, #passwordForm {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -97,7 +97,7 @@ footer a {
 /* Tablet */
 
 @media screen and (min-width: 600px) {
-  #loginForm, #registerForm, #updateForm {
+  #loginForm, #registerForm, #updateForm, #passwordForm {
     width: 75%;
     padding: 2rem 1.5rem;
   }
@@ -106,7 +106,7 @@ footer a {
 /* TabletXL */
 
 @media screen and (min-width: 768px) {
-  #loginForm, #registerForm, #updateForm {
+  #loginForm, #registerForm, #updateForm, #passwordForm {
     width: 60%;
   }
 }
@@ -114,7 +114,7 @@ footer a {
 /* PC */
 
 @media screen and (min-width: 922px) {
-  #loginForm, #registerForm, #updateForm {
+  #loginForm, #registerForm, #updateForm, #passwordForm {
     width: 45%;
   }
   .navbar-collapse {
