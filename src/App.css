@@ -12,11 +12,28 @@
   box-shadow: 0px 0px 15px 5px #515fc9;
 }
 
-header {}
-
 header img {
   width: 7.75em;
   object-fit: cover;
+}
+
+#welcomeContainer {
+  color: #515fc9;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+#welcomeContainer>span:first-child {
+  font-size: .7rem;
+  text-align: right;
+}
+
+#welcomeUser {
+  font-size: 1rem;
+  line-height: .7;
+  font-weight: 600;
 }
 
 .nav-link {
@@ -33,7 +50,7 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm {
+#loginForm, #registerForm, #updateForm {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -44,12 +61,17 @@ main {
   margin: 1rem 0;
 }
 
+h1 {
+  font-size: 1.75rem !important;
+}
+
 small {
   font-size: .7em !important;
 }
 
 .text-alert {
   color: crimson;
+  font-weight: 500;
 }
 
 button[type=submit] {
@@ -75,7 +97,7 @@ footer a {
 /* Tablet */
 
 @media screen and (min-width: 600px) {
-  #loginForm, #registerForm {
+  #loginForm, #registerForm, #updateForm {
     width: 75%;
     padding: 2rem 1.5rem;
   }
@@ -84,7 +106,7 @@ footer a {
 /* TabletXL */
 
 @media screen and (min-width: 768px) {
-  #loginForm, #registerForm {
+  #loginForm, #registerForm, #updateForm {
     width: 60%;
   }
 }
@@ -92,7 +114,15 @@ footer a {
 /* PC */
 
 @media screen and (min-width: 922px) {
-  #loginForm, #registerForm {
+  #loginForm, #registerForm, #updateForm {
     width: 45%;
+  }
+  .navbar-collapse {
+    flex-grow: unset !important;
+  }
+  #welcomeContainer {
+    margin-right: .5rem;
+    padding-right: 1rem;
+    border-right: #515fc9 1px solid;
   }
 }
