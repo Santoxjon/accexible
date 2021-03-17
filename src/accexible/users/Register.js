@@ -91,7 +91,7 @@ function Register() {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Contraseña</Form.Label>
-                    <Form.Control type="text" placeholder="Contraseña" required value={newPass} id="inputpassword" name="password" onChange={setValues} />
+                    <Form.Control type="password" placeholder="Contraseña" required value={newPass} id="inputpassword" name="password" onChange={setValues} />
                     <Form.Text className="text-alert" >
                         {errorLength}
                     </Form.Text>
