@@ -22,6 +22,7 @@ function Header() {
         deleteCookie("userId")
         deleteCookie("loginToken")
         setLogged(undefined);
+        window.location = "/";
     }
 
     useEffect(() => {
@@ -32,7 +33,10 @@ function Header() {
                     .then(res => setLogged(res));
             }
         }
-        checkLoginToken();
+
+        setInterval(() => {
+            checkLoginToken();
+        }, 1000)
     }, [])
 
     function ControlPanel() {
