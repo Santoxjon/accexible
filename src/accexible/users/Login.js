@@ -8,6 +8,7 @@ function Login() {
     const [newUsername, setNewUsername] = useState("");
     const [newUsernamePassword, setNewUsernamePassword] = useState("");
     const [loginMessageAlert, setLoginMessageAlert] = useState("");
+    const [cookieTime, setCookieTime] = useState(1);
 
     function readUsername(event) {
         setNewUsername(event.target.value)
@@ -16,6 +17,12 @@ function Login() {
     function readUsernamePassword(event) {
         setNewUsernamePassword(event.target.value)
     }
+
+    function keepUserLoggedIn(e) {
+        e.preventDefault()
+        setCookieTime(6000)
+    }
+
 
     function introduceNewUser(e) {
         e.preventDefault();
@@ -51,8 +58,8 @@ function Login() {
                     fetch(`http://localhost:9000/users/updateToken`, headers)
                         .then(res => res.json())
                         .then(res => {
-                            setCookie("userId", res._id, 1);
-                            setCookie("loginToken", res.loginToken, 1);
+                            setCookie("userId", res._id, cookieTime);
+                            setCookie("loginToken", res.loginToken, cookieTime);
                         })
                         .then(() => window.location = "/")
                 } else if (data.status === 1) {
@@ -79,7 +86,9 @@ function Login() {
                 <Form.Label>Introduce tu contraseña</Form.Label>
                 <Form.Control required name="password" value={newUsernamePassword} onChange={readUsernamePassword} type="password" placeholder="Contraseña" />
             </Form.Group>
-
+            <Form.Group controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Mantener la sesión iniciada" onChange={keepUserLoggedIn}/>
+            </Form.Group>
             <Button variant="primary" type="submit">
                 Entrar
             </Button>
