@@ -49,7 +49,7 @@ function Header() {
                 <Link onClick={collapseNav} className="nav-link" to="/test">Test</Link>
                 <Link onClick={collapseNav} className="nav-link" to="/chatbot">Chatbot</Link>
                 <Link onClick={collapseNav} className="nav-link" to="/profile">Ver perfil</Link>
-                <Link onClick={collapseNav} className="nav-link" to="#">Resultados</Link>
+                <Link onClick={collapseNav} className="nav-link" to="/results">Resultados</Link>
                 <Link onClick={logout} className="nav-link" to="/">Cerrar sesión</Link>
             </Nav>
         )
