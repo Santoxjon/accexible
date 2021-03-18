@@ -29,7 +29,7 @@ function Chatbot() {
                     <h1>Chatbot</h1>
                     <Form.Group>
                         <Form.Label>Chatbot pregunta...</Form.Label>
-                        <Form.Control type="textarea" value="Hola userName ¿qué tal estás?" readonly />
+                        <Form.Control type="textarea" value={`Hola ${chatbotUsername} ¿qué tal estás?`} readonly />
                     </Form.Group>
 
                     <Form.Group>
