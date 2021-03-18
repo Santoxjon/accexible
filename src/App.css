@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 * {
   font-family: 'Montserrat', sans-serif;
+  user-select: none;
 }
 
 #root {
@@ -81,12 +82,45 @@ small {
 }
 
 #btnBack, #btnNext {
-  width: 40%;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 3rem;
+  color: #515fc9;
+  outline: none !important;
+}
+
+#btnBack:hover, #btnNext:hover {
+  animation: move .6s infinite;
+}
+
+@keyframes move {
+  0%{
+    transform: scale(1);
+  }
+  33%{
+    transform: scale(1.2);
+  }
+  66%{
+    transform: scale(1.2);
+  }
+  0%{
+    transform: scale(1);
+  }
+}
+
+#btnBack:disabled, #btnNext:disabled {
+  opacity: 0;
 }
 
 button[type=submit] {
   float: right;
   padding: .375rem 2rem;
+  background-color: #515fc9 !important;
+}
+
+#submitTestBtn {
+  width: 100%;
 }
 
 #questionContainer {
@@ -106,7 +140,46 @@ button[type=submit] {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   gap: .35rem;
-  padding-bottom: 1rem;
+}
+
+#testOptionContainer .form-check {
+  padding: .3rem 0;
+  display: flex;
+  justify-content: center;
+  border-radius: .25rem;
+}
+
+#testOptionContainer input {
+  display: none;
+}
+
+#testOptionContainer label {
+  flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+.checkedRadio {
+  background-color: #515fc9;
+  color: white;
+  font-weight: 700;
+}
+
+.uncheckedRadio {
+  background-color: rgba(81, 95, 201, .25);
+  color: black;
+  font-weight: 500;
+}
+
+.uncheckedRadio:hover {
+  background-color: #515fc9;
+  color: white;
+  font-weight: 600;
+}
+
+hr {
+  margin: 0 0 1rem 0 !important;
+  border-top: .125rem #515fc9 solid !important;
 }
 
 footer {
@@ -127,16 +200,21 @@ footer a {
 /* Tablet */
 
 @media screen and (min-width: 600px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer {
     width: 75%;
     padding: 2rem 1.5rem;
+  }
+  #testOptionContainer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
   }
 }
 
 /* TabletXL */
 
 @media screen and (min-width: 768px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer {
     width: 60%;
   }
 }
@@ -144,9 +222,10 @@ footer a {
 /* PC */
 
 @media screen and (min-width: 922px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer {
     width: 45%;
   }
+
   .navbar-collapse {
     flex-grow: unset !important;
   }
