@@ -4,8 +4,8 @@ import Register from './users/Register';
 import Test from './users/Test';
 import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
-import Chatbot from './users/Chatbot';
 import Results from './users/Results';
+import ChatbotApp from './users/Chatbot';
 
 function Main() {
     return (
@@ -32,7 +32,7 @@ function Main() {
                 <Results />
             </Route>
             <Route exact path="/chatbot">
-                <Chatbot />
+                <ChatbotApp />
             </Route>
         </main>
     )
