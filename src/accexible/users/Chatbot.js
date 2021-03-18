@@ -7,6 +7,15 @@ import { Redirect } from 'react-router-dom';
 function Chatbot() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
     const [answer, setAnswer] = useState("");
+    const [chatbotUsername, setChatbotUsername] = useState("")
+
+    useEffect(() => {
+        fetch(`http://localhost:9000/users/checkToken?id=${userCookie.userId}&token=${userCookie.loginToken}`)
+            .then(res => res.json())
+            .then(res => {
+                setChatbotUsername(res.name);
+            });
+    }, []);
 
     function setValues(event) {
         setAnswer(event.target.value)
@@ -24,7 +33,7 @@ function Chatbot() {
                     </Form.Group>
 
                     <Form.Group>
-                        <Form.Label>"userName" contesta...</Form.Label>
+                        <Form.Label>{chatbotUsername} contesta...</Form.Label>
                         <Form.Control type="textarea" placeholder="Tu respuesta" required value={answer} id="inputAnswer" name="answer" onChange={setValues} />
                         <Form.Text className="text" >
                             <span>Escribe aquí tu respuesta.</span>
