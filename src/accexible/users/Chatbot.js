@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
 import { Redirect } from 'react-router-dom';
 
-function Chatbot() {
+
+function ChatbotApp() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
     const [answer, setAnswer] = useState("");
     const [chatbotUsername, setChatbotUsername] = useState("")
@@ -53,4 +54,4 @@ function Chatbot() {
     }
 }
 
-export default Chatbot;
+export default ChatbotApp;
