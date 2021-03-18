@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 
 function Test() {
     const [allQuestions, setAllQuestions] = useState([""]); // todas las preguntas
@@ -36,11 +39,12 @@ function Test() {
 
     useEffect(() => {
         setCurrentQuestion(allQuestions[questionIndex].text)
+        setUserAnswers(new Array(allQuestions.length))
     }, [allQuestions])
 
     useEffect(() => {
         setCurrentQuestion(allQuestions[questionIndex].text)
-        if (questionIndex == 0) {
+        if (questionIndex === 0) {
             setBackBtn(true);
         }
         else if (questionIndex >= allQuestions.length - 1) {
@@ -56,9 +60,8 @@ function Test() {
         if (userAnswers.length > 0) {
             console.log(userAnswers);
         }
-        if(Object.values(userAnswers).length === userAnswers.length) {
-            setTestSubmitBtnStatus(false);
-        }
+        console.log(Object.values(userAnswers).length, userAnswers.length);
+        setTestSubmitBtnStatus(userAnswers.includes(undefined));
     }, [userAnswers])
 
     function goBack() {
@@ -71,7 +74,15 @@ function Test() {
     function Answers() {
         let listAnswers = allAnswers.map((answer, index) => {
             return (
-                <Form.Check id={`radio-${answer.option}`} type="radio" name={questionIndex} value={answer.option} label={answer.text} onChange={radioChange} checked={userAnswers[questionIndex] == answer.option} />
+                <Form.Check
+                    className={userAnswers[questionIndex] === answer.option ? "checkedRadio" : "uncheckedRadio"}
+                    id={`radio-${answer.option}`}
+                    type="radio" name={questionIndex}
+                    value={answer.option}
+                    label={answer.text}
+                    onChange={radioChange}
+                    checked={userAnswers[questionIndex] === answer.option}
+                />
             )
         })
         return (
@@ -113,12 +124,17 @@ function Test() {
                     <Answers />
                 </div>
                 <div id="moveTestBtns">
-                    <Button variant="dark" id="btnBack" disabled={backBtn} onClick={goBack}>Anterior</Button>
-                    <Button variant="dark" id="btnNext" disabled={nextBtn} onClick={goNext}>Siguiente</Button>
+                    <button id="btnBack" disabled={backBtn} onClick={goBack}>
+                        <FontAwesomeIcon icon={faArrowCircleLeft} />
+                    </button>
+                    <button id="btnNext" disabled={nextBtn} onClick={goNext}>
+                    <FontAwesomeIcon icon={faArrowCircleRight} />
+                    </button>
                 </div>
                 <Form id="mainTestForm" method="POST">
                     <HiddenInputs />
-                    <Button type="submit" disabled={testSubmitBtnStatus}>Enviar resultados</Button>
+                    <hr />
+                    <Button id="submitTestBtn" type="submit" disabled={testSubmitBtnStatus}>Enviar resultados</Button>
                 </Form>
             </div>
 
