@@ -1,6 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
+import { API_URL } from './../Consts';
 
 function Register() {
 
@@ -79,7 +80,7 @@ function Register() {
 
     return (
         <>
-            <Form id="registerForm" action="http://localhost:9000/users/register" method="POST">
+            <Form id="registerForm" action={`${API_URL}/users/register`} method="POST">
                 <h1>Registro</h1>
                 <Form.Group>
                     <Form.Label>Nombre y apellidos</Form.Label>
