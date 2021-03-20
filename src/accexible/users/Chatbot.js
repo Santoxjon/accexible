@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
 import { Redirect } from 'react-router-dom';
 
-function Chatbot() {
+
+function ChatbotApp() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
     const [answer, setAnswer] = useState("");
     const [chatbotUsername, setChatbotUsername] = useState("")
@@ -29,7 +30,7 @@ function Chatbot() {
                     <h1>Chatbot</h1>
                     <Form.Group>
                         <Form.Label>Chatbot pregunta...</Form.Label>
-                        <Form.Control type="textarea" value="Hola userName ¿qué tal estás?" readonly />
+                        <Form.Control type="textarea" value={`Hola ${chatbotUsername} ¿qué tal estás?`} readonly />
                     </Form.Group>
 
                     <Form.Group>
@@ -53,4 +54,4 @@ function Chatbot() {
     }
 }
 
-export default Chatbot;
+export default ChatbotApp;
