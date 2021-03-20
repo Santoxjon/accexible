@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import React, { useState, useEffect } from 'react';
 import { getCookie } from '../Functions';
 import { Redirect, Link } from 'react-router-dom';
+import { API_URL } from './../Consts';
 
 function UserDetails() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
@@ -20,7 +21,7 @@ function UserDetails() {
     const btnStatus = emailError === "" ? false : true;
 
     useEffect(() => {
-        fetch(`http://localhost:9000/users/checkToken?id=${userCookie.userId}&token=${userCookie.loginToken}`)
+        fetch(`${API_URL}/users/checkToken?id=${userCookie.userId}&token=${userCookie.loginToken}`)
             .then(res => res.json())
             .then(res => {
                 setNewUsername(res.name);
@@ -49,7 +50,7 @@ function UserDetails() {
             }
         }
 
-        fetch(`http://localhost:9000/users/updateUser`, fetchOldUser)
+        fetch(`${API_URL}/users/updateUser`, fetchOldUser)
             .then(res => res.json())
             .then(() => {
                 setAlertVisibility(true);
@@ -62,7 +63,7 @@ function UserDetails() {
             setEmailError("");
         }
         else {
-            fetch(`http://localhost:9000/users/checkEmail?email=${newEmail}`)
+            fetch(`${API_URL}/users/checkEmail?email=${newEmail}`)
                 .then(res => res.json())
                 .then((user) => {
                     if (user) {

@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
 import { Redirect } from 'react-router-dom';
+import { API_URL } from './../Consts';
 
 function ChangePassword() {
 
@@ -72,7 +73,7 @@ function ChangePassword() {
         }
     }, [newPass])
 
-    
+
 
     function updatePassword(e) {
         e.preventDefault();
@@ -89,7 +90,7 @@ function ChangePassword() {
             }
         }
 
-        fetch(`http://localhost:9000/users/changePassword`, fetchEditOldPassword)
+        fetch(`${API_URL}/users/changePassword`, fetchEditOldPassword)
             .then(res => res.json())
             .then(() => {
                 window.location = "/profile"
@@ -135,4 +136,4 @@ function ChangePassword() {
 }
 
 
-    export default ChangePassword;
+export default ChangePassword;
