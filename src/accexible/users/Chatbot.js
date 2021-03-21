@@ -3,8 +3,12 @@ import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
 import { Redirect } from 'react-router-dom';
+
 import ChatBot from 'react-simple-chatbot';
 import styled from 'styled-components'
+
+import { API_URL } from './../Consts';
+
 
 function ChatbotApp() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
@@ -12,7 +16,7 @@ function ChatbotApp() {
     const [chatbotUsername, setChatbotUsername] = useState("")
 
     useEffect(() => {
-        fetch(`http://localhost:9000/users/checkToken?id=${userCookie.userId}&token=${userCookie.loginToken}`)
+        fetch(`${API_URL}/users/checkToken?id=${userCookie.userId}&token=${userCookie.loginToken}`)
             .then(res => res.json())
             .then(res => {
                 setChatbotUsername(res.name);

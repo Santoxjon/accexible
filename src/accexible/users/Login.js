@@ -2,7 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
 import { setCookie } from '../Functions';
-
+import { API_URL } from './../Consts';
 
 function Login() {
     const [newUsername, setNewUsername] = useState("");
@@ -40,7 +40,7 @@ function Login() {
             }
         }
 
-        fetch('http://localhost:9000/users/login', fetchNewUser)
+        fetch(`${API_URL}/users/login`, fetchNewUser)
             .then(respuesta => respuesta.json())
             .then(data => {
                 if (data.status === 0) {
@@ -55,7 +55,7 @@ function Login() {
                         }
                     };
 
-                    fetch(`http://localhost:9000/users/updateToken`, headers)
+                    fetch(`${API_URL}/users/updateToken`, headers)
                         .then(res => res.json())
                         .then(res => {
                             setCookie("userId", res._id, cookieTime);
@@ -71,7 +71,6 @@ function Login() {
     }
 
     return (
-        // <Form method="POST" action="http://localhost:9000/users/login">
         <Form id="loginForm" onSubmit={introduceNewUser}>
             <h1>Iniciar Sesión</h1>
             <Form.Group controlId="formBasicEmail">
@@ -87,7 +86,7 @@ function Login() {
                 <Form.Control required name="password" value={newUsernamePassword} onChange={readUsernamePassword} type="password" placeholder="Contraseña" />
             </Form.Group>
             <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Mantener la sesión iniciada" onChange={keepUserLoggedIn}/>
+                <Form.Check type="checkbox" label="Mantener la sesión iniciada" onChange={keepUserLoggedIn} />
             </Form.Group>
             <Button variant="primary" type="submit">
                 Entrar

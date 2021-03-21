@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
+import { API_URL } from './../Consts';
 
 function Test() {
     const [allQuestions, setAllQuestions] = useState([""]); // todas las preguntas
@@ -18,7 +19,7 @@ function Test() {
 
     useEffect(() => {
         function getQuestions() {
-            fetch(`http://localhost:9000/questions`)
+            fetch(`${API_URL}/questions`)
                 .then(respuesta => respuesta.json())
                 .then(dataQuestions => {
                     setAllQuestions(dataQuestions);
@@ -26,7 +27,7 @@ function Test() {
         }
 
         function getAnswers() {
-            fetch(`http://localhost:9000/answers`)
+            fetch(`${API_URL}/answers`)
                 .then(respuesta => respuesta.json())
                 .then(dataAnswers => {
                     setAllAnswers(dataAnswers);
@@ -128,7 +129,7 @@ function Test() {
                         <FontAwesomeIcon icon={faArrowCircleLeft} />
                     </button>
                     <button id="btnNext" disabled={nextBtn} onClick={goNext}>
-                    <FontAwesomeIcon icon={faArrowCircleRight} />
+                        <FontAwesomeIcon icon={faArrowCircleRight} />
                     </button>
                 </div>
                 <Form id="mainTestForm" method="POST">

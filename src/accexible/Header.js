@@ -4,6 +4,7 @@ import logo from './../logo_accexible.png';
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { getCookie, deleteCookie } from './Functions';
+import { API_URL } from './Consts';
 
 function Header() {
     const [logged, setLogged] = useState(undefined)
@@ -28,7 +29,7 @@ function Header() {
     useEffect(() => {
         function checkLoginToken() {
             if (cookieUser && cookieToken) {
-                fetch(`http://localhost:9000/users/checkToken?token=${cookieToken}&id=${cookieUser}`)
+                fetch(`${API_URL}/users/checkToken?token=${cookieToken}&id=${cookieUser}`)
                     .then(res => res.json())
                     .then(res => setLogged(res));
             }
@@ -53,7 +54,7 @@ function Header() {
                 <Link onClick={collapseNav} className="nav-link" to="/test">Test</Link>
                 <Link onClick={collapseNav} className="nav-link" to="/chatbot">Chatbot</Link>
                 <Link onClick={collapseNav} className="nav-link" to="/profile">Ver perfil</Link>
-                <Link onClick={collapseNav} className="nav-link" to="#">Resultados</Link>
+                <Link onClick={collapseNav} className="nav-link" to="/results">Resultados</Link>
                 <Link onClick={logout} className="nav-link" to="/">Cerrar sesión</Link>
             </Nav>
         )
