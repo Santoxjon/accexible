@@ -5,7 +5,7 @@ import Test from './users/Test';
 import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
 import Results from './users/Results';
-import ChatbotApp from './users/Chatbot';
+import ChatbotApp from './chatbot/Chatbot';
 
 function Main() {
     return (
