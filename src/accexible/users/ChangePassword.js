@@ -7,7 +7,7 @@ import { API_URL } from './../Consts';
 
 function ChangePassword() {
 
-    const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
+    const userCookie = { userId: getCookie("userId") };
     const [newPass, setPass] = useState("");
     const [passRep, setPassRep] = useState("");
     const [errorLength, setErrorLength] = useState("");
@@ -97,8 +97,7 @@ function ChangePassword() {
             });
     }
 
-    if (userCookie.userId && userCookie.loginToken) {
-
+    if (userCookie.userId) {
         return (
             <>
                 <Form id="passwordForm" onSubmit={updatePassword}>

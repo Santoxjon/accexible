@@ -7,7 +7,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { API_URL, EMAIL_REGEX, FULLNAME_REGEX } from './../Consts';
 
 function UserDetails() {
-    const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
+    const userCookie = { userId: getCookie("userId") };
     const [newName, setNewName] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [oldEmail, setOldEmail] = useState("")
@@ -105,7 +105,7 @@ function UserDetails() {
         return (<></>)
     }
 
-    if (userCookie.userId && userCookie.loginToken) {
+    if (userCookie.userId) {
         return (
             <>
                 <Form

@@ -2,8 +2,8 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import { API_URL, EMAIL_REGEX, FULLNAME_REGEX } from './../Consts';
-import { checkEmail } from '../Functions';
-import { Link } from 'react-router-dom';
+import { checkEmail, getCookie } from '../Functions';
+import { Link, Redirect } from 'react-router-dom';
 
 function Register() {
 
@@ -115,89 +115,94 @@ function Register() {
         }
     }, [newPass])
 
-    return (
-        <>
-            <Form
-                id="registerForm"
-                action={`${API_URL}/users/register`}
-                method="POST"
-            >
-                <h1>Registro</h1>
-                <Form.Group>
-                    <Form.Label htmlFor="inputName">Nombre completo</Form.Label>
-                    <Form.Control
-                        type="text"
-                        placeholder="Andoni Martínez"
-                        required
-                        value={newName}
-                        id="inputName"
-                        name="name"
-                        onChange={setValues}
-                        minLength="6"
-                        maxLength="20"
-                    />
-                    <Form.Text className="text-alert" >
-                        {errorName}
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label htmlFor="inputEmail">Email</Form.Label>
-                    <Form.Control
-                        type="email"
-                        placeholder="prueba@mail.com"
-                        required
-                        value={newEmail}
-                        id="inputEmail"
-                        name="email"
-                        onChange={setValues}
-                    />
-                    <Form.Text className="text-alert" >
-                        {errorEmail}
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label htmlFor="inputPassword">Contraseña</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Contraseña"
-                        required
-                        value={newPass}
-                        id="inputPassword"
-                        name="password"
-                        onChange={setValues}
-                    />
-                    <Form.Text className="text-alert" >
-                        {errorLength}
-                    </Form.Text>
-                    <Form.Text className="text-alert">
-                        {errorMayus}
-                    </Form.Text>
-                    <Form.Text className="text-alert">
-                        {errorNumber}
-                    </Form.Text>
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label htmlFor="inputRepPassword">Repetir Contraseña</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Repetir contraseña"
-                        required
-                        id="inputRepPassword"
-                        value={passRep}
-                        onChange={setValues}
-                    />
-                </Form.Group>
-                <Form.Group className="formSubmitGroup">
-                    <Link to="/login">Ya tengo cuenta</Link>
-                    <Button
-                        type="submit"
-                        disabled={buttonStatus}
-                    >
-                        Enviar
+    if (!getCookie("userId")) {
+        return (
+            <>
+                <Form
+                    id="registerForm"
+                    action={`${API_URL}/users/register`}
+                    method="POST"
+                >
+                    <h1>Registro</h1>
+                    <Form.Group>
+                        <Form.Label htmlFor="inputName">Nombre completo</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Andoni Martínez"
+                            required
+                            value={newName}
+                            id="inputName"
+                            name="name"
+                            onChange={setValues}
+                            minLength="6"
+                            maxLength="20"
+                        />
+                        <Form.Text className="text-alert" >
+                            {errorName}
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label htmlFor="inputEmail">Email</Form.Label>
+                        <Form.Control
+                            type="email"
+                            placeholder="prueba@mail.com"
+                            required
+                            value={newEmail}
+                            id="inputEmail"
+                            name="email"
+                            onChange={setValues}
+                        />
+                        <Form.Text className="text-alert" >
+                            {errorEmail}
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label htmlFor="inputPassword">Contraseña</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Contraseña"
+                            required
+                            value={newPass}
+                            id="inputPassword"
+                            name="password"
+                            onChange={setValues}
+                        />
+                        <Form.Text className="text-alert" >
+                            {errorLength}
+                        </Form.Text>
+                        <Form.Text className="text-alert">
+                            {errorMayus}
+                        </Form.Text>
+                        <Form.Text className="text-alert">
+                            {errorNumber}
+                        </Form.Text>
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label htmlFor="inputRepPassword">Repetir Contraseña</Form.Label>
+                        <Form.Control
+                            type="password"
+                            placeholder="Repetir contraseña"
+                            required
+                            id="inputRepPassword"
+                            value={passRep}
+                            onChange={setValues}
+                        />
+                    </Form.Group>
+                    <Form.Group className="formSubmitGroup">
+                        <Link to="/login">Ya tengo cuenta</Link>
+                        <Button
+                            type="submit"
+                            disabled={buttonStatus}
+                        >
+                            Enviar
                     </Button>
-                </Form.Group>
-            </Form>
-        </>
-    )
+                    </Form.Group>
+                </Form>
+            </>
+        )
+    }
+    else {
+        <Redirect to="/" />
+    }
 }
 export default Register;
