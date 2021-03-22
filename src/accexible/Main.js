@@ -1,10 +1,10 @@
 import { Route } from 'react-router-dom';
 import Login from './users/Login';
 import Register from './users/Register';
-import Test from './users/Test';
+import Test from './questionstest/Test';
 import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
-import Results from './users/Results';
+import Results from './results/Results';
 import ChatbotApp from './users/Chatbot';
 
 function Main() {
