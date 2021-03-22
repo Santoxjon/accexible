@@ -3,12 +3,14 @@ import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
 import { setCookie } from '../Functions';
 import { API_URL } from './../Consts';
+import { Link } from 'react-router-dom';
 
 function Login() {
     const [newUsername, setNewUsername] = useState("");
     const [newUsernamePassword, setNewUsernamePassword] = useState("");
     const [loginMessageAlert, setLoginMessageAlert] = useState("");
     const [cookieTime, setCookieTime] = useState(1);
+    const [keepLogged, setKeepLogged] = useState(false);
 
     function readUsername(event) {
         setNewUsername(event.target.value)
@@ -19,12 +21,12 @@ function Login() {
     }
 
     function keepUserLoggedIn(e) {
-        e.preventDefault()
+        setKeepLogged(!keepLogged);
         setCookieTime(6000)
     }
 
 
-    function introduceNewUser(e) {
+    function insertNewUser(e) {
         e.preventDefault();
 
         var addNewUser = {
@@ -71,11 +73,18 @@ function Login() {
     }
 
     return (
-        <Form id="loginForm" onSubmit={introduceNewUser}>
+        <Form id="loginForm" onSubmit={insertNewUser}>
             <h1>Iniciar Sesión</h1>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Dirección de correo</Form.Label>
-                <Form.Control required name="email" value={newUsername} onChange={readUsername} type="email" placeholder="Introduce tu correo electrónico" />
+                <Form.Control
+                    required
+                    name="email"
+                    value={newUsername}
+                    onChange={readUsername}
+                    type="email"
+                    placeholder="Introduce tu correo electrónico"
+                />
                 <Form.Text className="text-alert">
                     {loginMessageAlert}
                 </Form.Text>
@@ -83,14 +92,33 @@ function Login() {
 
             <Form.Group controlId="formBasicPassword">
                 <Form.Label>Introduce tu contraseña</Form.Label>
-                <Form.Control required name="password" value={newUsernamePassword} onChange={readUsernamePassword} type="password" placeholder="Contraseña" />
+                <Form.Control
+                    required
+                    name="password"
+                    value={newUsernamePassword}
+                    type="password"
+                    placeholder="Contraseña"
+                    onChange={readUsernamePassword}
+                />
             </Form.Group>
             <Form.Group controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="Mantener la sesión iniciada" onChange={keepUserLoggedIn} />
+                <Form.Check
+                    type="checkbox"
+                    checked={keepLogged}
+                    label="Mantener la sesión iniciada"
+                    onChange={keepUserLoggedIn}
+                />
             </Form.Group>
-            <Button variant="primary" type="submit">
-                Entrar
-            </Button>
+            <Form.Group className="formSubmitGroup">
+                <Link to="/register">No tengo cuenta</Link>
+                <Button
+                    variant="primary"
+                    type="submit"
+                >
+                    Entrar
+                </Button>
+            </Form.Group>
+
         </Form>
     )
 }
