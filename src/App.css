@@ -51,7 +51,7 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm {
+#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm , #resultsContainer {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -200,7 +200,7 @@ footer a {
 /* Tablet */
 
 @media screen and (min-width: 600px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer {
     width: 75%;
     padding: 2rem 1.5rem;
   }
@@ -214,7 +214,7 @@ footer a {
 /* TabletXL */
 
 @media screen and (min-width: 768px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer {
     width: 60%;
   }
 }
@@ -222,7 +222,7 @@ footer a {
 /* PC */
 
 @media screen and (min-width: 922px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer {
     width: 45%;
   }
 
