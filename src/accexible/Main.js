@@ -4,7 +4,7 @@ import Register from './users/Register';
 import Test from './questionstest/Test';
 import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
-import Results from './users/Results';
+import Results from './results/Results';
 import ChatbotApp from './chatbot/Chatbot';
 
 function Main() {
