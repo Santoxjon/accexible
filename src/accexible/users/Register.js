@@ -24,16 +24,16 @@ function Register() {
 
     function setValues(event) {
         switch (event.target.id) {
-            case "inputname":
+            case "inputName":
                 setName(event.target.value);
                 break;
-            case "inputemail":
+            case "inputEmail":
                 setEmail(event.target.value);
                 break;
-            case "inputpassword":
+            case "inputPassword":
                 setPass(event.target.value);
                 break;
-            case "inputreppassword":
+            case "inputRepPassword":
                 setPassRep(event.target.value);
                 break;
             default:
