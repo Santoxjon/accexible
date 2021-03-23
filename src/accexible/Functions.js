@@ -1,3 +1,5 @@
+import { API_URL } from "./Consts";
+
 export function setCookie(cname, cvalue, exdays) {
     let d = new Date();
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
@@ -23,4 +25,12 @@ export function getCookie(cname) {
 
 export function deleteCookie(name) {
     document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+export function checkEmail(newEmail) {
+    return fetch(`${API_URL}/users/checkEmail?email=${newEmail}`)
+        .then(res => res.json())
+        .then((user) => {
+            return user;
+        });
 }

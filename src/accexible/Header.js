@@ -67,7 +67,7 @@ function Header() {
                     <img src={logo} alt="logo" />
                 </Link>
                 <div id="welcomeContainer">
-                    <span>{logged ? "Bienvenido" : ""}</span>
+                    <span>{logged ? "Bienvenid@" : ""}</span>
                     <span id="welcomeUser">{logged ? logged.name.split(' ')[0] + " " + logged.name.split(' ')[1] : ""}</span>
                 </div>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
