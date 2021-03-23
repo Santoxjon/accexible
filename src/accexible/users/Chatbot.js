@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
 import { Redirect } from 'react-router-dom';
-
 import ChatBot from 'react-simple-chatbot';
 import styled from 'styled-components'
 
@@ -27,8 +26,7 @@ function ChatbotApp() {
         setAnswer(event.target.value)
     }
 
-    if (userCookie.userId && userCookie.loginToken) {
-
+    if (userCookie.userId) {
         return (
             <>
                 <Form id="chatbotForm">
@@ -44,7 +42,7 @@ function ChatbotApp() {
                                 options: [
                                     { value: 1, label: 'Sí.', trigger: '4' },
                                     { value: 2, label: 'No.', trigger: '3' },
-                                    
+
                                 ],
                             },
                             {
