@@ -20,7 +20,7 @@ function Login() {
         setNewUsernamePassword(event.target.value)
     }
 
-    function keepUserLoggedIn(e) {
+    function keepUserLoggedIn() {
         setKeepLogged(!keepLogged);
         setCookieTime(6000)
     }
