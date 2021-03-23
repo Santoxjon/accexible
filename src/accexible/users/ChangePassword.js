@@ -17,13 +17,13 @@ function ChangePassword() {
     const [passwordIsValid, setPasswordIsValid] = useState(false);
     const buttonStatus = !(passwordsMatch && passwordIsValid);
 
-    function setValues(event) {
-        switch (event.target.id) {
+    function setValues(e) {
+        switch (e.target.id) {
             case "inputpassword":
-                setPass(event.target.value);
+                setPass(e.target.value);
                 break;
             case "inputreppassword":
-                setPassRep(event.target.value);
+                setPassRep(e.target.value);
                 break;
             default:
                 break;

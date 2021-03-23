@@ -12,12 +12,12 @@ function Login() {
     const [cookieTime, setCookieTime] = useState(1);
     const [keepLogged, setKeepLogged] = useState(false);
 
-    function readUsername(event) {
-        setNewUsername(event.target.value)
+    function readUsername(e) {
+        setNewUsername(e.target.value)
     }
 
-    function readUsernamePassword(event) {
-        setNewUsernamePassword(event.target.value)
+    function readUsernamePassword(e) {
+        setNewUsernamePassword(e.target.value)
     }
 
     function keepUserLoggedIn() {

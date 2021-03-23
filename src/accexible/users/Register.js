@@ -22,19 +22,19 @@ function Register() {
     const [nameIsValid, setNameIsValid] = useState(false)
     const buttonStatus = !(passwordsMatch && passwordIsValid && emailIsValid && nameIsValid);
 
-    function setValues(event) {
-        switch (event.target.id) {
+    function setValues(e) {
+        switch (e.target.id) {
             case "inputName":
-                setName(event.target.value);
+                setName(e.target.value);
                 break;
             case "inputEmail":
-                setEmail(event.target.value);
+                setEmail(e.target.value);
                 break;
             case "inputPassword":
-                setPass(event.target.value);
+                setPass(e.target.value);
                 break;
             case "inputRepPassword":
-                setPassRep(event.target.value);
+                setPassRep(e.target.value);
                 break;
             default:
                 break;
