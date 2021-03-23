@@ -105,7 +105,7 @@ function UserDetails() {
         return (<></>)
     }
 
-    if (userCookie.userId && userCookie.loginToken) {
+    if (userCookie.userId) {
         return (
             <>
                 <Form
@@ -144,13 +144,15 @@ function UserDetails() {
                             {emailError}
                         </Form.Text>
                     </Form.Group>
-                    <Link to="/changePassword">¿Quieres cambiar tu contraseña?</Link>
-                    <Button
-                        type="submit"
-                        disabled={btnStatus}
-                    >
-                        Actualizar
+                    <Form.Group className="formSubmitGroup">
+                        <Link to="/changePassword">Cambiar contraseña</Link>
+                        <Button
+                            type="submit"
+                            disabled={btnStatus}
+                        >
+                            Actualizar
                     </Button>
+                    </Form.Group>
                 </Form>
             </>
         )

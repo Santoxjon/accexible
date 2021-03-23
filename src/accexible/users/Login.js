@@ -1,9 +1,9 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import React, { useState } from 'react';
-import { setCookie } from '../Functions';
+import { getCookie, setCookie } from '../Functions';
 import { API_URL } from './../Consts';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 function Login() {
     const [newUsername, setNewUsername] = useState("");
@@ -12,15 +12,15 @@ function Login() {
     const [cookieTime, setCookieTime] = useState(1);
     const [keepLogged, setKeepLogged] = useState(false);
 
-    function readUsername(event) {
-        setNewUsername(event.target.value)
+    function readUsername(e) {
+        setNewUsername(e.target.value)
     }
 
-    function readUsernamePassword(event) {
-        setNewUsernamePassword(event.target.value)
+    function readUsernamePassword(e) {
+        setNewUsernamePassword(e.target.value)
     }
 
-    function keepUserLoggedIn(e) {
+    function keepUserLoggedIn() {
         setKeepLogged(!keepLogged);
         setCookieTime(6000)
     }
@@ -72,55 +72,62 @@ function Login() {
             })
     }
 
-    return (
-        <Form id="loginForm" onSubmit={insertNewUser}>
-            <h1>Iniciar Sesión</h1>
-            <Form.Group controlId="formBasicEmail">
-                <Form.Label>Dirección de correo</Form.Label>
-                <Form.Control
-                    required
-                    name="email"
-                    value={newUsername}
-                    onChange={readUsername}
-                    type="email"
-                    placeholder="Introduce tu correo electrónico"
-                />
-                <Form.Text className="text-alert">
-                    {loginMessageAlert}
-                </Form.Text>
-            </Form.Group>
+    if (!getCookie("userId")) {
+        return (
+            <Form id="loginForm" onSubmit={insertNewUser}>
+                <h1>Iniciar Sesión</h1>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Dirección de correo</Form.Label>
+                    <Form.Control
+                        required
+                        name="email"
+                        value={newUsername}
+                        onChange={readUsername}
+                        type="email"
+                        placeholder="Introduce tu correo electrónico"
+                    />
+                    <Form.Text className="text-alert">
+                        {loginMessageAlert}
+                    </Form.Text>
+                </Form.Group>
 
-            <Form.Group controlId="formBasicPassword">
-                <Form.Label>Introduce tu contraseña</Form.Label>
-                <Form.Control
-                    required
-                    name="password"
-                    value={newUsernamePassword}
-                    type="password"
-                    placeholder="Contraseña"
-                    onChange={readUsernamePassword}
-                />
-            </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-                <Form.Check
-                    type="checkbox"
-                    checked={keepLogged}
-                    label="Mantener la sesión iniciada"
-                    onChange={keepUserLoggedIn}
-                />
-            </Form.Group>
-            <Form.Group className="formSubmitGroup">
-                <Link to="/register">No tengo cuenta</Link>
-                <Button
-                    variant="primary"
-                    type="submit"
-                >
-                    Entrar
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Introduce tu contraseña</Form.Label>
+                    <Form.Control
+                        required
+                        name="password"
+                        value={newUsernamePassword}
+                        type="password"
+                        placeholder="Contraseña"
+                        onChange={readUsernamePassword}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formBasicCheckbox">
+                    <Form.Check
+                        type="checkbox"
+                        checked={keepLogged}
+                        label="Mantener la sesión iniciada"
+                        onChange={keepUserLoggedIn}
+                    />
+                </Form.Group>
+                <Form.Group className="formSubmitGroup">
+                    <Link to="/register">No tengo cuenta</Link>
+                    <Button
+                        variant="primary"
+                        type="submit"
+                    >
+                        Entrar
                 </Button>
-            </Form.Group>
+                </Form.Group>
 
-        </Form>
-    )
+            </Form>
+        )
+    }
+    else {
+        return (
+            <Redirect to="/" />
+        )
+    }
 }
 
 export default Login;

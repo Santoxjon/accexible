@@ -31,7 +31,10 @@ function Header() {
             if (cookieUser && cookieToken) {
                 fetch(`${API_URL}/users/checkToken?token=${cookieToken}&id=${cookieUser}`)
                     .then(res => res.json())
-                    .then(res => setLogged(res));
+                    .then(res => {
+                        setLogged(res);
+                        if(!res) logout();
+                    });
             }
         }
 

@@ -10,7 +10,7 @@ import { API_URL } from '../Consts';
 
 function Test() {
 
-    const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
+    const userCookie = { userId: getCookie("userId") };
 
     const [allQuestions, setAllQuestions] = useState([""]); // todas las preguntas
     const [allAnswers, setAllAnswers] = useState([])
