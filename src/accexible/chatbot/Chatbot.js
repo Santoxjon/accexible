@@ -31,7 +31,9 @@ function ChatbotApp() {
             <>
                 <Form id="chatbotForm">
                     <ChatBot
-                        steps={[
+                    headerTitle="LiteApp Chat"
+                    recognitionEnable={true}
+                        let steps={[
                             {
                                 id: '1',
                                 message: '¿Has salido las últimas dos semanas de casa?',
@@ -58,6 +60,13 @@ function ChatbotApp() {
                             {
                                 id: '5',
                                 user: true,
+                                validator: (value) => {
+                                    if (value == "estoy feliz") {
+                                        return 'Me alegro';
+                                    } else {
+                                        return true;
+                                    }
+                                },
                                 trigger: '6',
                             },
                             {
