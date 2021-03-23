@@ -56,9 +56,6 @@ main {
   padding: 1rem .5rem;
   border-radius: 5px;
   width: 95%;
-}
-
-#registerForm {
   margin: 1rem 0;
 }
 
@@ -113,8 +110,19 @@ small {
   opacity: 0;
 }
 
+.formSubmitGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0 !important;
+}
+
+.formSubmitGroup a {
+  color: #515fc9 !important;
+}
+
 button[type=submit] {
-  float: right;
   padding: .375rem 2rem;
   background-color: #515fc9 !important;
 }
@@ -195,6 +203,10 @@ footer p {
 footer a {
   color: #515fc9 !important;
   text-decoration: underline;
+}
+
+#groupName {
+  font-weight: 600;
 }
 
 /* Tablet */
