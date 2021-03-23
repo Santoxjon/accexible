@@ -102,6 +102,7 @@ function Test() {
                 <Form.Control name={`question${index}`} type="hidden" value={userAnswers[index] === undefined ? "" : userAnswers[index]} required />
             )
         })
+        // console.log(listInputs);
         return (
             listInputs
         )
@@ -137,6 +138,7 @@ function Test() {
                     </div>
                     <Form id="mainTestForm" action={`${API_URL}/test/newresult`} method="POST">
                         <HiddenInputs />
+                        <input type="hidden" name="userId" value={userCookie.userId}></input>
                         <hr />
                         <Button id="submitTestBtn" type="submit" disabled={testSubmitBtnStatus}>Enviar resultados</Button>
                     </Form>
