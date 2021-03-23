@@ -6,19 +6,20 @@
 
 #root {
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   min-height: 100vh;
   max-width: 1400px;
   margin: 0 auto;
   box-shadow: 0px 0px 15px 5px #515fc9;
 }
 
-header {
-  position: fixed;
+nav {
+  position: fixed !important;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
+  max-width: 1400px;
 }
 
 header img {
@@ -59,7 +60,7 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm , #resultsContainer {
+#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm, #resultsContainer {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -100,16 +101,16 @@ small {
 }
 
 @keyframes move {
-  0%{
+  0% {
     transform: scale(1);
   }
-  33%{
+  33% {
     transform: scale(1.2);
   }
-  66%{
+  66% {
     transform: scale(1.2);
   }
-  0%{
+  0% {
     transform: scale(1);
   }
 }
@@ -245,7 +246,6 @@ footer a {
   #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer {
     width: 45%;
   }
-
   .navbar-collapse {
     flex-grow: unset !important;
   }
@@ -254,4 +254,82 @@ footer a {
     padding-right: 1rem;
     border-right: #515fc9 1px solid;
   }
+}
+
+@media screen and (min-width: 1400px) {
+  nav {
+    margin: 0 auto;
+  }
+}
+
+#chatbotJs {
+  width: 40vw;
+  height: 60vh;
+  background-color: #f8f9fada;
+  border-radius: 5px;
+  padding: 2rem 1.5rem;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+#chatContainer {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+#userInputContainer {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+}
+
+.chatMessage {
+  padding: .3rem .4rem .7rem .4rem;
+  width: 75%;
+}
+
+.chatMessage:not(:last-child){
+  margin-bottom: 1rem;
+}
+
+.chatMessage small {
+  font-size: 80% !important;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.chatMessage p, .chatMessage hr {
+  margin: 0;
+}
+
+.chatMessage hr {
+  margin: 0 0 .35rem 0 !important;
+  width: 45%;
+  opacity: .25;
+}
+
+.msgBot {
+  background-color: #515fc9;
+  color: #fffffe;
+  margin-right: auto;
+  border-radius: .5rem .5rem .5rem 0;
+  font-weight: 600;
+}
+
+.msgBot hr {
+  border-top: #fffffe solid 1px !important;
+}
+
+.msgUser {
+  color: #515fc9;
+  background-color: #fffffe;
+  margin-left: auto;
+  border-radius: .5rem .5rem 0 .5rem;
+  font-weight: 600;
+}
+
+.msgUser hr {
+  border-top: #515fc9 solid 1px !important;
 }
