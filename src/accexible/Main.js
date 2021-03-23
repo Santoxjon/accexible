@@ -6,10 +6,16 @@ import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
 import Results from './results/Results';
 import ChatbotApp from './users/Chatbot';
+import React, { useState, useEffect } from 'react';
 
 function Main() {
+    const [headerHeight, setHeaderHeight] = useState("0px")
+    useEffect(() => {
+        setHeaderHeight(document.querySelector("header").clientHeight + "px");
+    }, [])
+
     return (
-        <main>
+        <main style={{ "marginTop": headerHeight }}>
             <Route exact path="/">
                 <p>Main</p>
             </Route>
