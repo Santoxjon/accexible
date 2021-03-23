@@ -20,7 +20,7 @@ function Results() {
             });
     }, []);
 
-    if (userCookie.userId && userCookie.loginToken) {
+    if (userCookie.userId) {
 
         return (
             <div id="resultsContainer">

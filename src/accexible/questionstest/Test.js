@@ -10,7 +10,7 @@ import { API_URL } from '../Consts';
 
 function Test() {
 
-    const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
+    const userCookie = { userId: getCookie("userId") };
 
     const [allQuestions, setAllQuestions] = useState([""]); // todas las preguntas
     const [allAnswers, setAllAnswers] = useState([])
@@ -102,6 +102,7 @@ function Test() {
                 <Form.Control name={`question${index}`} type="hidden" value={userAnswers[index] === undefined ? "" : userAnswers[index]} required />
             )
         })
+        // console.log(listInputs);
         return (
             listInputs
         )
@@ -113,7 +114,7 @@ function Test() {
         setUserAnswers(array);
     }
 
-    if (userCookie.userId && userCookie.loginToken) {
+    if (userCookie.userId) {
         return (
             <>
                 <div id="testContainer">
@@ -137,6 +138,7 @@ function Test() {
                     </div>
                     <Form id="mainTestForm" action={`${API_URL}/test/newresult`} method="POST">
                         <HiddenInputs />
+                        <input type="hidden" name="userId" value={userCookie.userId}></input>
                         <hr />
                         <Button id="submitTestBtn" type="submit" disabled={testSubmitBtnStatus}>Enviar resultados</Button>
                     </Form>

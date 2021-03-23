@@ -5,11 +5,20 @@ import Test from './questionstest/Test';
 import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
 import Results from './results/Results';
+
+//import ChatbotApp from './users/Chatbot';
+import ChatbotJS from './users/ChatbotJS';
+import React, { useState, useEffect } from 'react';
 import ChatbotApp from './chatbot/Chatbot';
 
 function Main() {
+    const [headerHeight, setHeaderHeight] = useState("0px")
+    useEffect(() => {
+        setHeaderHeight(document.querySelector("header").clientHeight + "px");
+    }, [])
+
     return (
-        <main>
+        <main style={{ "marginTop": headerHeight }}>
             <Route exact path="/">
                 <p>Main</p>
             </Route>
@@ -33,6 +42,9 @@ function Main() {
             </Route>
             <Route exact path="/chatbot">
                 <ChatbotApp />
+            </Route>
+            <Route exact path="/chatbotjs">
+                <ChatbotJS />
             </Route>
         </main>
     )
