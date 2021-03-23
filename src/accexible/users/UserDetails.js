@@ -7,7 +7,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { API_URL, EMAIL_REGEX, FULLNAME_REGEX } from './../Consts';
 
 function UserDetails() {
-    const userCookie = { userId: getCookie("userId") };
+    const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
     const [newName, setNewName] = useState("");
     const [newEmail, setNewEmail] = useState("");
     const [oldEmail, setOldEmail] = useState("")
@@ -144,13 +144,15 @@ function UserDetails() {
                             {emailError}
                         </Form.Text>
                     </Form.Group>
-                    <Link to="/changePassword">¿Quieres cambiar tu contraseña?</Link>
-                    <Button
-                        type="submit"
-                        disabled={btnStatus}
-                    >
-                        Actualizar
+                    <Form.Group className="formSubmitGroup">
+                        <Link to="/changePassword">Cambiar contraseña</Link>
+                        <Button
+                            type="submit"
+                            disabled={btnStatus}
+                        >
+                            Actualizar
                     </Button>
+                    </Form.Group>
                 </Form>
             </>
         )
