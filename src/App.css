@@ -60,12 +60,17 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm, #resultsContainer {
+#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm, #resultsContainer, #textoIntroductorio {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
   width: 95%;
   margin: 1rem 0;
+}
+
+.botonModal{
+  display:flex !important;
+  justify-content:center;
 }
 
 h1 {
@@ -221,7 +226,7 @@ footer a {
 /* Tablet */
 
 @media screen and (min-width: 600px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer, #textoIntroductorio {
     width: 75%;
     padding: 2rem 1.5rem;
   }
@@ -235,7 +240,7 @@ footer a {
 /* TabletXL */
 
 @media screen and (min-width: 768px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer, #textoIntroductorio {
     width: 60%;
   }
 }
@@ -243,7 +248,7 @@ footer a {
 /* PC */
 
 @media screen and (min-width: 922px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer, #textoIntroductorio {
     width: 45%;
   }
   .navbar-collapse {
