@@ -1,6 +1,6 @@
 import { Doughnut } from 'react-chartjs-2'
 
-function ResultTestDonut() {
+function ResultTestDonut(props) {
     const data = {
         labels: ["A", "B", "C", "D"],
         datasets: [{
