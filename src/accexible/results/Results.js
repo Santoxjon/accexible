@@ -10,7 +10,7 @@ import ResultChatbot from './ResultChatbot';
 
 function Results() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
-    const [username, setUsername] = useState("")
+    const [username, setUsername] = useState("");
 
     useEffect(() => {
         fetch(`${API_URL}/users/checkToken?id=${userCookie.userId}&token=${userCookie.loginToken}`)
