@@ -1,26 +1,36 @@
 import { Route } from 'react-router-dom';
+
 import Login from './users/Login';
 import Register from './users/Register';
 import Test from './questionstest/Test';
 import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
 import Results from './results/Results';
-
-//import ChatbotApp from './users/Chatbot';
-import ChatbotJS from './users/ChatbotJS';
+import Chatbot from './chatbot/Chatbot';
 import React, { useState, useEffect } from 'react';
+
 import ChatbotApp from './chatbot/Chatbot';
+import { Form } from 'react-bootstrap';
+
 
 function Main() {
     const [headerHeight, setHeaderHeight] = useState("0px")
     useEffect(() => {
-        setHeaderHeight(document.querySelector("header").clientHeight + "px");
+        setHeaderHeight(document.querySelector("nav").clientHeight + "px");
     }, [])
 
     return (
         <main style={{ "marginTop": headerHeight }}>
             <Route exact path="/">
-                <p>Main</p>
+                <Form.Group id="textoIntroductorio">
+                    <Form.Label><h6>Sobre LiteApp</h6></Form.Label>
+                    <Form.Text><h6>En estos momentos donde la salud mental es tan importante como la salud física, LiteApp te ayuda a descubrir si tienes un principio de ansiedad o si considera que necesitas ayuda médica profesional.</h6>
+                </Form.Text>
+                <Form.Text><h6>LiteApp es una aplicación realizada para acceXible.</h6></Form.Text>
+                </Form.Group>
+
+
+
             </Route>
             <Route exact path="/login">
                 <Login />
@@ -41,10 +51,7 @@ function Main() {
                 <Results />
             </Route>
             <Route exact path="/chatbot">
-                <ChatbotApp />
-            </Route>
-            <Route exact path="/chatbotjs">
-                <ChatbotJS />
+                <Chatbot />
             </Route>
         </main>
     )
