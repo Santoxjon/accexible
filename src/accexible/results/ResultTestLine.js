@@ -1,6 +1,6 @@
 import { Line } from 'react-chartjs-2'
 
-function ResultTestLine() {
+function ResultTestLine(props) {
     const data = {
         labels: ["P1", "P2", "P3", "P4", "P5", "P6", "P7", "P8", "P9"],
         datasets: [{
@@ -69,6 +69,7 @@ function ResultTestLine() {
 
             <div id="lineGraphic">
                 <Line data={data} options={options} />
+                <p>{props.userTestRes[0] ? props.userTestRes[0].scoreTest : "Cargando resultados"}</p> 
             </div>
 
         </div>
