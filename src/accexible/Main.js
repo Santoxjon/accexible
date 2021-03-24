@@ -5,16 +5,13 @@ import Test from './questionstest/Test';
 import UserDetails from './users/UserDetails';
 import ChangePassword from './users/ChangePassword';
 import Results from './results/Results';
-
-//import ChatbotApp from './users/Chatbot';
-import ChatbotJS from './users/ChatbotJS';
+import Chatbot from './chatbot/Chatbot';
 import React, { useState, useEffect } from 'react';
-import ChatbotApp from './chatbot/Chatbot';
 
 function Main() {
     const [headerHeight, setHeaderHeight] = useState("0px")
     useEffect(() => {
-        setHeaderHeight(document.querySelector("header").clientHeight + "px");
+        setHeaderHeight(document.querySelector("nav").clientHeight + "px");
     }, [])
 
     return (
@@ -41,10 +38,7 @@ function Main() {
                 <Results />
             </Route>
             <Route exact path="/chatbot">
-                <ChatbotApp />
-            </Route>
-            <Route exact path="/chatbotjs">
-                <ChatbotJS />
+                <Chatbot />
             </Route>
         </main>
     )
