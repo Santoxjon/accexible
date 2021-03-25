@@ -11,6 +11,9 @@ function ResultTest() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
     const [userTestResults, setUserTestResults] = useState([]);
 
+    const [testToShow, setTestToShow] = useState({});
+    let [fullDate, setFullDate] = useState("");
+    let testShow;
 
     /* GET ALL RESULTS FROM THE USER */
 
@@ -20,14 +23,43 @@ function ResultTest() {
             .then(allTestResults => {
                 setUserTestResults(allTestResults);
             });
-
-
     }, []);
+
+    function modifyDate(dateTest) {
+        // console.log(date);
+        let date = new Date(dateTest);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let dt = date.getDate();
+        let h = date.getHours();
+        let min = date.getMinutes();
+        let fullDate;
+
+        if (dt < 10) {
+            dt = '0' + dt;
+        }
+        if (month < 10) {
+            month = '0' + month;
+        }
+
+        fullDate = `${dt}-${month}-${year} / ${h}:${min}`;
+        console.log(fullDate);
+        setFullDate(fullDate);
+    }
+
 
     useEffect(() => {
 
         console.log(userTestResults);
-        // <ResultTest />
+        // console.log(userTestResults[0].date);
+        testShow = userTestResults.map(function (test, index) {
+            modifyDate(test.date);
+            // console.log(test.date);
+            return (
+                <option key={index} value={index}>Test {index + 1} - Fecha {fullDate}</option>
+            )
+        })
+        console.log(testShow);
     }, [userTestResults]);
 
 
@@ -37,12 +69,11 @@ function ResultTest() {
             <div id="textTestResults">
                 <p>Explicacion gral acorde a los resultados 4 posibles resultados? con diferentes orientaciones sobre como seguir</p>
                 <p>El resultado es obtenido a través de la valoración del test de preguntas cerradas realizado anteriormente. Tras su estudio por medio de un algoritmo, se le ofrece al usuario unos resultados e indicaciones personalizadas, correspondientes con el análisis realizado a través de las respuestas señaladas. </p>
-                {/* meter tabla con los resultados obtenidos del ultimo test */}
-                <ResultTestTable tableTestRes={userTestResults}/>
+                <ResultTestTable tableTestRes={userTestResults} />
             </div>
 
             <div id="graphicsTestResults">
-                <ResultTestLine userTestRes={userTestResults}/>
+                <ResultTestLine userTestRes={userTestResults} />
                 <ResultTestDonut />
             </div>
 
@@ -51,9 +82,10 @@ function ResultTest() {
                 <Form.Group controlId="selectTestResult">
                     <Form.Label>Mostrar resultados test</Form.Label>
                     <Form.Control as="select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
+
+                        <option>{testShow}</option>
+                        {/* <option>2</option>
+                        <option>3</option> */}
 
                     </Form.Control>
                 </Form.Group>
