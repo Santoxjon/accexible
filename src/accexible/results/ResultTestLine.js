@@ -69,7 +69,7 @@ function ResultTestLine(props) {
 
             <div id="lineGraphic">
                 <Line data={data} options={options} />
-                <p>{props.userTestRes[0] ? props.userTestRes[0].scoreTest : "Cargando resultados"}</p> 
+                <p>Puntuacion Test (borrar): {props.userTestRes[0] ? props.userTestRes[0].scoreTest : "Cargando resultados"}</p> 
             </div>
 
         </div>
