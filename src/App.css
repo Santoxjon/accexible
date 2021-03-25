@@ -60,7 +60,7 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm, #resultsContainer, #chatbotContainer {
+#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm, #resultsContainer, #chatbotContainer, #textoIntroductorio {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -336,6 +336,28 @@ footer a {
   font-weight: 600;
 }
 
+.contenedorProgreso{
+  display: flex;
+height: 1rem;
+overflow: hidden;
+line-height: 0;
+font-size: .75rem;
+background-color: #e9ecef;
+border-radius: .25rem;
+margin: 1.5rem 0 0 0;
+}
+
+.progress-bar{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #515fc9 !important;
+  transition: width .6s ease;
+}
 /* Tablet */
 
 @media screen and (min-width: 600px) {
