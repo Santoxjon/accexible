@@ -60,9 +60,7 @@ main {
   background-size: cover;
 }
 
-
 #loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm, #resultsContainer, #chatbotContainer {
-
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -71,18 +69,46 @@ main {
 }
 
 #chatbotContainer {
-  width: 95%;
-  background-color: #f8f9fada;
-  border-radius: 5px;
   display: grid;
   grid-template-rows: auto 65vh auto;
+  gap: .3rem;
+}
+
+#modalContainer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+.modal-dialog {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.modal-footer {
+  justify-content: center !important;
+}
+
+.modal-footer a {
+  width: 100%;
+}
+
+#readmeButton {
+  background: none;
+  border: none;
+  border-radius: 50px;
+  color: #515fc9;
+  background-color: #515fc941;
+  font-weight: 600;
 }
 
 #chatContainer {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  margin-bottom: .3rem;
+  border-top: 1px solid #515fc9;
+  border-bottom: 1px solid #515fc9;
+  padding: .3rem 0;
 }
 
 #userInputContainer {
@@ -121,6 +147,10 @@ main {
   font-weight: 500;
 }
 
+.chatMessage p {
+  font-size: .9rem;
+}
+
 .chatMessage p, .chatMessage hr {
   margin: 0;
 }
@@ -153,11 +183,11 @@ main {
 
 .msgUser hr {
   border-top: #515fc9 solid 1px !important;
-
 }
 
 h1 {
   font-size: 1.75rem !important;
+  margin: 0 !important;
 }
 
 small {
