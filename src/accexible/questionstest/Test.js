@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { API_URL } from '../Consts';
+import { Container, ProgressBar } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Test() {
 
@@ -21,6 +23,7 @@ function Test() {
     const [userAnswers, setUserAnswers] = useState([]);
     const [testSubmitBtnStatus, setTestSubmitBtnStatus] = useState(true);
     const questionBeginning = "¿Durante las últimas 2 semanas, ¿con qué frecuencia ";
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         function getQuestions() {
@@ -68,13 +71,20 @@ function Test() {
         }
         console.log(Object.values(userAnswers).length, userAnswers.length);
         setTestSubmitBtnStatus(userAnswers.includes(undefined));
+
+
+        // if (userAnswers.length === allQuestions.length) {
+        //     setProgress(progress+12)
+        // }
     }, [userAnswers])
 
     function goBack() {
         setQuestionIndex(questionIndex - 1)
+        setProgress(progress - 13)
     }
     function goNext() {
         setQuestionIndex(questionIndex + 1)
+        setProgress(progress + 13)
     }
 
     function Answers() {
@@ -114,6 +124,10 @@ function Test() {
         setUserAnswers(array);
     }
 
+    function relocateToChatbot() {
+        <Redirect to ="/chatbot"/>
+    }
+
     if (userCookie.userId) {
         return (
             <>
@@ -132,6 +146,9 @@ function Test() {
                         <button id="btnBack" disabled={backBtn} onClick={goBack}>
                             <FontAwesomeIcon icon={faArrowCircleLeft} />
                         </button>
+                        <Container className="contenedorBarra">
+                        <ProgressBar className="contenedorProgreso" now={progress} animated />
+                        </Container>
                         <button id="btnNext" disabled={nextBtn} onClick={goNext}>
                             <FontAwesomeIcon icon={faArrowCircleRight} />
                         </button>
@@ -140,7 +157,7 @@ function Test() {
                         <HiddenInputs />
                         <input type="hidden" name="userId" value={userCookie.userId}></input>
                         <hr />
-                        <Button id="submitTestBtn" type="submit" disabled={testSubmitBtnStatus}>Enviar resultados</Button>
+                        <Button id="submitTestBtn" type="submit" disabled={testSubmitBtnStatus} onClick={relocateToChatbot()}>Enviar resultados</Button>
                     </Form>
                 </div>
 

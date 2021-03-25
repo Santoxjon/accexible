@@ -54,8 +54,7 @@ function Header() {
         }
         return (
             <Nav className="ml-auto">
-                <Link onClick={collapseNav} className="nav-link" to="/test">Test</Link>
-                <Link onClick={collapseNav} className="nav-link" to="/chatbot">Chatbot</Link>
+                <Link onClick={collapseNav} className="nav-link" to="/test">Prueba</Link>
                 <Link onClick={collapseNav} className="nav-link" to="/profile">Ver perfil</Link>
                 <Link onClick={collapseNav} className="nav-link" to="/results">Resultados</Link>
                 <Link onClick={logout} className="nav-link" to="/">Cerrar sesión</Link>
