@@ -14,9 +14,11 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 function Chatbot() {
     const [userInp, setUserInp] = useState("");
     const [chat, setChat] = useState();
-    const [messages, setMessages] = useState(["Hola! Soy el chatbot 😄 ¿Por qué no empiezas contándome qué tal estás?"])
-    const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
+    const [messages, setMessages] = useState(["Hola! Soy el chatbot 😄 ¿Por qué no empiezas contándome qué tal estás?"]);
     const [show, setShow] = useState(false);
+    const [inputStatus, setInputStatus] = useState(false);
+    const [isWaiting, setIsWaiting] = useState(false);
+    const userCookie = { userId: getCookie("userId") };
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -28,21 +30,27 @@ function Chatbot() {
             )
         }));
         if (messages.length % 2 === 0) {
-            let messageObj = { message: messages[messages.length - 1] };
-            var fecthHeaders = {
-                method: 'POST',
-                body: JSON.stringify(messageObj),
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8'
+            setIsWaiting(true);
+            setInputStatus(true);
+            setTimeout(() => {
+                let messageObj = { message: messages[messages.length - 1], userId: userCookie.userId };
+                var fecthHeaders = {
+                    method: 'POST',
+                    body: JSON.stringify(messageObj),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
                 }
-            }
-            fetch(`${API_URL}/chatbot/checkMessage`, fecthHeaders)
-                .then(res => res.json())
-                .then(data => {
-                    let mArray = [...messages];
-                    mArray.push(data);
-                    setMessages(mArray);
-                })
+                fetch(`${API_URL}/chatbot/checkMessage`, fecthHeaders)
+                    .then(res => res.json())
+                    .then(data => {
+                        let mArray = [...messages];
+                        mArray.push(data);
+                        setMessages(mArray);
+                        setInputStatus(false);
+                        setIsWaiting(false);
+                    })
+            }, 500);
         }
     }, [messages]);
 
@@ -51,12 +59,24 @@ function Chatbot() {
         document.querySelector("#chatContainer").scrollTo(0, document.querySelector("#chatContainer").scrollHeight);
     }, [chat])
 
+    useEffect(() => {
+        if (!inputStatus) document.querySelector("#chatTextarea").focus();
+    }, [inputStatus])
+
     function Message(props) {
         return (
             <div className={`chatMessage ${props.authorClass}`}>
                 <small><FontAwesomeIcon icon={props.author === "Chatbot" ? faRobot : faUserAlt} /> {props.author}</small>
                 <hr />
                 <p>{props.text}</p>
+            </div>
+        )
+    }
+
+    function WaitMessage() {
+        return (
+            <div style={{ display: !isWaiting ? 'none' : 'block' }} className={`msgWait`}>
+                <span>Escribiendo...</span>
             </div>
         )
     }
@@ -70,17 +90,15 @@ function Chatbot() {
     }
 
     function submitForm(e) {
-        if (e.which === 13 && !e.shiftKey) {
+        if (e.which === 13 && !e.shiftKey && e.target.value.replace(/^\s+|\s+$/g, "").length != 0) {
             e.preventDefault();
             addMessage();
         }
     }
 
-    if (userCookie.userId && userCookie.loginToken) {
-
+    if (userCookie.userId) {
         return (
             <>
-
                 <div id="chatbotContainer">
                     <div id="modalContainer">
                         <h1>Chatbot</h1>
@@ -103,13 +121,17 @@ function Chatbot() {
                     </div>
                     <div id="chatContainer">
                         {chat}
+                        <WaitMessage />
                     </div>
                     <Form onSubmit={addMessage}>
                         <Form.Group id="userInputContainer">
                             <Form.Control
                                 as="textarea"
                                 id="chatTextarea"
+                                placeholder="Escribe algo..."
                                 value={userInp}
+                                disabled={inputStatus}
+                                required
                                 onChange={(e) => setUserInp(e.target.value)}
                                 onKeyPress={submitForm}
                             />
@@ -119,7 +141,6 @@ function Chatbot() {
                         </Form.Group>
                     </Form>
                 </div>
-
             </>
         )
     } else {
