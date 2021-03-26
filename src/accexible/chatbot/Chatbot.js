@@ -64,11 +64,17 @@ function Chatbot() {
     }, [inputStatus])
 
     function Message(props) {
+        let textList = props.text.split('&').map(text => {
+            return (
+                <p>{text}</p>
+            )
+        });
+
         return (
             <div className={`chatMessage ${props.authorClass}`}>
                 <small><FontAwesomeIcon icon={props.author === "Chatbot" ? faRobot : faUserAlt} /> {props.author}</small>
                 <hr />
-                <p>{props.text}</p>
+                {textList}
             </div>
         )
     }
