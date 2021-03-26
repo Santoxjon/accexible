@@ -90,7 +90,7 @@ function Chatbot() {
     }
 
     function submitForm(e) {
-        if (e.which === 13 && !e.shiftKey) {
+        if (e.which === 13 && !e.shiftKey && e.target.value.replace(/^\s+|\s+$/g, "").length != 0) {
             e.preventDefault();
             addMessage();
         }
@@ -131,6 +131,7 @@ function Chatbot() {
                                 placeholder="Escribe algo..."
                                 value={userInp}
                                 disabled={inputStatus}
+                                required
                                 onChange={(e) => setUserInp(e.target.value)}
                                 onKeyPress={submitForm}
                             />
