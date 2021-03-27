@@ -32,6 +32,8 @@ function Chatbot() {
         if (messages.length % 2 === 0) {
             setIsWaiting(true);
             setInputStatus(true);
+            let randomWaitingTime = ~~((Math.random() * 1200) + 300);
+            console.log(randomWaitingTime);
             setTimeout(() => {
                 let messageObj = { message: messages[messages.length - 1], userId: userCookie.userId };
                 var fecthHeaders = {
@@ -50,7 +52,7 @@ function Chatbot() {
                         setInputStatus(false);
                         setIsWaiting(false);
                     })
-            }, 500);
+            }, randomWaitingTime);
         }
     }, [messages]);
 
