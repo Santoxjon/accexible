@@ -67,7 +67,7 @@ function Register() {
                 })
         }
         else {
-            setErrorEmail("El email no es válido!");
+            setErrorEmail("¡El email no es válido!");
             setEmailIsValid(false);
         }
     }, [newEmail])

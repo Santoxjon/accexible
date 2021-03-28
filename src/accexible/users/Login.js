@@ -9,6 +9,7 @@ function Login() {
     const [newUsername, setNewUsername] = useState("");
     const [newUsernamePassword, setNewUsernamePassword] = useState("");
     const [loginMessageAlert, setLoginMessageAlert] = useState("");
+    const [loginPasswordAlert, setLoginPasswordAlert] = useState("");
     const [cookieTime, setCookieTime] = useState(1);
     const [keepLogged, setKeepLogged] = useState(false);
 
@@ -65,7 +66,7 @@ function Login() {
                         })
                         .then(() => window.location = "/")
                 } else if (data.status === 1) {
-                    setLoginMessageAlert("Contraseña incorrecta")
+                    setLoginPasswordAlert("Contraseña incorrecta")
                 } else {
                     setLoginMessageAlert("Usuario no existente")
                 }
@@ -101,6 +102,9 @@ function Login() {
                         placeholder="Contraseña"
                         onChange={readUsernamePassword}
                     />
+                    <Form.Text className="text-alert">
+                        {loginPasswordAlert}
+                    </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formBasicCheckbox">
                     <Form.Check
