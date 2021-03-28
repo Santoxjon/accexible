@@ -23,7 +23,8 @@ function Test() {
     const [userAnswers, setUserAnswers] = useState([]);
     const [testSubmitBtnStatus, setTestSubmitBtnStatus] = useState(true);
     const questionBeginning = "¿Durante las últimas 2 semanas, ¿con qué frecuencia ";
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(100);
+    
 
     useEffect(() => {
         function getQuestions() {
@@ -87,6 +88,21 @@ function Test() {
         setProgress(progress + 13)
     }
 
+    // function BarraProgreso() {
+    //     useEffect(() => {
+    //         if (questionIndex++) {
+    //             setProgress(progress + 100)
+    //             return (
+    //                 <ProgressBar className="contenedorProgreso" now={progress} animated />
+    //             )
+    //         } else if (questionIndex--) {
+    //             setProgress(progress - 100)
+    //         }
+    //     }, [])
+
+    // }
+
+
     function Answers() {
         let listAnswers = allAnswers.map((answer, index) => {
             return (
@@ -125,7 +141,7 @@ function Test() {
     }
 
     function relocateToChatbot() {
-        <Redirect to ="/chatbot"/>
+        <Redirect to="/chatbot" />
     }
 
     if (userCookie.userId) {
@@ -147,7 +163,7 @@ function Test() {
                             <FontAwesomeIcon icon={faArrowCircleLeft} />
                         </button>
                         <Container className="contenedorBarra">
-                        <ProgressBar className="contenedorProgreso" now={progress} animated />
+                            <ProgressBar className="contenedorProgreso" now={progress} label={`${questionIndex + 1}/9 preguntas`}/>
                         </Container>
                         <button id="btnNext" disabled={nextBtn} onClick={goNext}>
                             <FontAwesomeIcon icon={faArrowCircleRight} />
