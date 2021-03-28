@@ -19,6 +19,7 @@ function Chatbot() {
     const [inputStatus, setInputStatus] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
     const userCookie = { userId: getCookie("userId") };
+    const [responseTime, setResponseTime] = useState(Date.now());
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -35,7 +36,7 @@ function Chatbot() {
             let randomWaitingTime = ~~((Math.random() * 1200) + 300);
             console.log(randomWaitingTime);
             setTimeout(() => {
-                let messageObj = { message: messages[messages.length - 1], userId: userCookie.userId };
+                let messageObj = { message: messages[messages.length - 1], userId: userCookie.userId, responseTime };
                 var fecthHeaders = {
                     method: 'POST',
                     body: JSON.stringify(messageObj),
@@ -51,6 +52,7 @@ function Chatbot() {
                         setMessages(mArray);
                         setInputStatus(false);
                         setIsWaiting(false);
+                        setResponseTime(Date.now());
                     })
             }, randomWaitingTime);
         }
@@ -59,11 +61,11 @@ function Chatbot() {
 
     useEffect(() => {
         document.querySelector("#chatContainer").scrollTo(0, document.querySelector("#chatContainer").scrollHeight);
-    }, [chat])
+    }, [chat]);
 
     useEffect(() => {
         if (!inputStatus) document.querySelector("#chatTextarea").focus();
-    }, [inputStatus])
+    }, [inputStatus]);
 
     function Message(props) {
         let textList = props.text.split('&').map(text => {
