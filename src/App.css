@@ -344,7 +344,7 @@ footer a {
   font-weight: 600;
 }
 
-.contenedorProgreso{
+.contenedorProgreso.progress{
   display: flex;
 height: 1rem;
 overflow: hidden;
@@ -353,6 +353,11 @@ font-size: .75rem;
 background-color: #e9ecef;
 border-radius: .25rem;
 margin: 1.5rem 0 0 0;
+}
+
+.botonConsultas{
+  display:flex;
+  justify-content:center
 }
 
 .progress-bar{

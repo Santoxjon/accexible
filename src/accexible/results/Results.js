@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { API_URL } from '../Consts';
-
+import { Button } from 'react-bootstrap'
 
 import ResultTest from './ResultTest';
 import ResultChatbot from './ResultChatbot';
+
 
 
 function Results() {
@@ -28,6 +29,9 @@ function Results() {
 
                 <ResultTest />
                 <ResultChatbot />
+                <div className="botonConsultas">
+                <Button href='https://www.google.com/maps/search/consulta+psicologica' target="_blank">Muéstrame las consultas psicológicas cercanas.</Button>
+                </div>
 
             </div>
         )
