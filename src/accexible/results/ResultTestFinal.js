@@ -26,7 +26,7 @@ function ResultTestFinal() {
         fetch(`${API_URL}/test/resultsuser/${userCookie.userId}/`)
             .then(res => res.json())
             .then(allTestResults => {
-                setUserTestResults(allTestResults);
+                if(allTestResults.message!=="NO EXISTEN RESULTADOS A MOSTRAR") setUserTestResults(allTestResults);
             });
     }, []);
 
