@@ -14,11 +14,12 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 function Chatbot() {
     const [userInp, setUserInp] = useState("");
     const [chat, setChat] = useState();
-    const [messages, setMessages] = useState(["Hola! Soy el chatbot 😄 ¿Por qué no empiezas contándome qué tal estás?"]);
+    const [messages, setMessages] = useState(["¡Hola! Soy el chatbot 😄 ¿Por qué no empiezas contándome qué tal estás?"]);
     const [show, setShow] = useState(false);
     const [inputStatus, setInputStatus] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
     const userCookie = { userId: getCookie("userId") };
+    const [responseTime, setResponseTime] = useState(Date.now());
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -32,8 +33,10 @@ function Chatbot() {
         if (messages.length % 2 === 0) {
             setIsWaiting(true);
             setInputStatus(true);
+            let randomWaitingTime = ~~((Math.random() * 1200) + 300);
+            console.log(randomWaitingTime);
             setTimeout(() => {
-                let messageObj = { message: messages[messages.length - 1], userId: userCookie.userId };
+                let messageObj = { message: messages[messages.length - 1], userId: userCookie.userId, responseTime };
                 var fecthHeaders = {
                     method: 'POST',
                     body: JSON.stringify(messageObj),
@@ -49,26 +52,33 @@ function Chatbot() {
                         setMessages(mArray);
                         setInputStatus(false);
                         setIsWaiting(false);
+                        setResponseTime(Date.now());
                     })
-            }, 500);
+            }, randomWaitingTime);
         }
     }, [messages]);
 
 
     useEffect(() => {
         document.querySelector("#chatContainer").scrollTo(0, document.querySelector("#chatContainer").scrollHeight);
-    }, [chat])
+    }, [chat]);
 
     useEffect(() => {
         if (!inputStatus) document.querySelector("#chatTextarea").focus();
-    }, [inputStatus])
+    }, [inputStatus]);
 
     function Message(props) {
+        let textList = props.text.split('&').map(text => {
+            return (
+                <p>{text}</p>
+            )
+        });
+
         return (
             <div className={`chatMessage ${props.authorClass}`}>
                 <small><FontAwesomeIcon icon={props.author === "Chatbot" ? faRobot : faUserAlt} /> {props.author}</small>
                 <hr />
-                <p>{props.text}</p>
+                {textList}
             </div>
         )
     }

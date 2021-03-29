@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { API_URL } from '../Consts';
-
+import { Button } from 'react-bootstrap'
 import ResultTestFinal from './ResultTestFinal';
-
+import ResultTest from './ResultTest';
+import ResultChatbot from './ResultChatbot';
 
 function Results() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
@@ -24,6 +25,11 @@ function Results() {
             <div id="resultsContainer">
                 <h1>Resultados {username}</h1>
                 <ResultTestFinal />
+                <ResultTest />
+                <ResultChatbot />
+                <div className="botonConsultas">
+                <Button href='https://www.google.com/maps/search/consulta+psicologica' target="_blank">Muéstrame las consultas psicológicas cercanas.</Button>
+                </div>
             </div>
         )
     } else {

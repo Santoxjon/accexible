@@ -165,8 +165,19 @@ main {
   background-color: #515fc9;
   color: #fffffe;
   margin-right: auto;
-  border-radius: .5rem .5rem .5rem 0;
+  border-radius: .5rem;
   font-weight: 600;
+  position: relative;
+  margin-left: .5rem;
+}
+
+.msgBot::after {
+  content: ' ';
+  position: absolute;
+  left: -.5rem;
+  top: 0;
+  border: .5rem solid;
+  border-color: #515fc9 transparent transparent transparent;
 }
 
 .msgBot hr {
@@ -177,8 +188,19 @@ main {
   color: #515fc9;
   background-color: #fffffe;
   margin-left: auto;
-  border-radius: .5rem .5rem 0 .5rem;
+  border-radius: .5rem;
   font-weight: 600;
+  position: relative;
+  margin-right: .5rem;
+}
+
+.msgUser::after {
+  content: ' ';
+  position: absolute;
+  right: -.5rem;
+  top: 0;
+  border: .5rem solid;
+  border-color: #fffffe transparent transparent transparent;
 }
 
 .msgUser hr {
@@ -190,7 +212,8 @@ main {
   color: #515fc9;
   width: 90%;
   border-radius: .5rem .5rem .5rem 0;
-  margin-top: -.25rem;
+  margin-bottom: .15rem;
+
 }
 
 h1 {
@@ -344,15 +367,22 @@ footer a {
   font-weight: 600;
 }
 
-.contenedorProgreso{
+
+.contenedorProgreso {
   display: flex;
-height: 1rem;
-overflow: hidden;
-line-height: 0;
-font-size: .75rem;
-background-color: #e9ecef;
-border-radius: .25rem;
-margin: 1.5rem 0 0 0;
+  height: 1rem;
+  overflow: hidden;
+  line-height: 0;
+  font-size: .75rem;
+  background-color: #e9ecef;
+  border-radius: .25rem;
+  margin: 1.5rem 0 0 0;
+}
+
+
+.botonConsultas{
+  display:flex;
+  justify-content:center
 }
 
 .progress-bar{
@@ -366,6 +396,7 @@ margin: 1.5rem 0 0 0;
   background-color: #515fc9 !important;
   transition: width .6s ease;
 }
+
 /* Tablet */
 
 @media screen and (min-width: 600px) {
