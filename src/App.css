@@ -385,6 +385,17 @@ footer a {
   width: 100%;
 }
 
+#showConsultsButton{
+  display:flex;
+  justify-content:center;
+  margin: 1rem 0 0 0;
+}
+
+#showDetailsButton{
+  display:flex;
+  justify-content:center;
+}
+
 .progressDot, .filledDot {
   width: 2rem;
   height: 2rem;
