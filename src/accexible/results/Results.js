@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { getCookie } from '../Functions';
 import { Redirect, Link } from 'react-router-dom';
 import { API_URL } from '../Consts';
-import { Button } from 'react-bootstrap'
 import ResultTestFinal from './ResultTestFinal';
 
 function Results() {
@@ -23,9 +22,6 @@ function Results() {
             <div id="resultsContainer">
                 <h1>Resultados {username}</h1>
                 <ResultTestFinal />
-                <div className="botonConsultas">
-                <Button href='https://www.google.com/maps/search/consulta+psicologica' target="_blank">Muéstrame las consultas psicológicas cercanas.</Button>
-                </div>
             </div>
         )
     } else {

@@ -5,10 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { API_URL } from '../Consts';
 import ResultTestTable from './ResultTestTable';
 import ResultTestDonut from './ResultTestDonut';
-// import ResultTestPolar from './ResultTestPolar';
-// import ResultTestRadar from './ResultTestRadar';
 import ResultFinalMixed from './ResultFinalMixed';
-
 
 function ResultTestFinal() {
     const userCookie = { userId: getCookie("userId"), loginToken: getCookie("loginToken") };
@@ -17,7 +14,7 @@ function ResultTestFinal() {
     const [currentTest, setCurrentTest] = useState("");
     let [fullDate, setFullDate] = useState("");
     let [showTest, setShowTest] = useState("");
-    let finalScore; //= showTest.scoreTest + showTest.scoreChat;
+    let finalScore;
     let [recommend, setRecommend] = useState("");
     let [showDetails, setShowDetails] = useState("none");
 
@@ -74,34 +71,21 @@ function ResultTestFinal() {
     }
 
     /* Recommendations attending final score*/
-    finalScore = showTest.scoreTest + showTest.scoreChat+showTest.pronounScoring + showTest.rumination + showTest.responseTimeScoring;
+    finalScore = parseFloat(Math.round((showTest.scoreTest + showTest.scoreChat + showTest.pronounScoring + showTest.rumination + showTest.responseTimeScoring) * 100) / 100).toFixed(2);
+
     useEffect(() => {
         setRecommend("");
         if (finalScore < 5) {
-            setRecommend("No se aprecian rasgos depresivos.");
+            setRecommend("No se aprecian rasgos psicológicos negativos.");
         } else if (finalScore >= 5 && finalScore < 10) {
             setRecommend("Se recomienda consultar con un especialista.")
         } else {
             setRecommend("Es necesaria la consulta urgente con un especialista.");
         }
-
-        // switch (finalScore) {
-        //     case (finalScore < 5):
-        //         setRecommend("No se aprecian rasgos depresivos")
-        //         break;
-        //     case (10 < finalScore >= 5):
-        //         setRecommend("Rasgos depresivos leves.Se recomienda consultar con un especialista")
-        //         break;
-        //     case (15 < finalScore > 10):
-        //         setRecommend("Rasgos depresivos severos.Es necesaria la consulta urgente con un especialista")
-        //         break;
-        //     default:
-        //         break;
-        // }
         setShowDetails("none");
     }, [showTest]);
 
-    /* Manage the details display by the button */ 
+    /* Manage the details display by the button */
     function showDetailsButt() {
         if (showDetails === "none") {
             setShowDetails("block");
@@ -142,6 +126,10 @@ function ResultTestFinal() {
                 <Button variant="outline-primary" style={{ display: showTest ? "block" : "none" }} onClick={showDetailsButt}>Mostrar Detalles</Button>
             </div>
 
+            <div id="showConsultsButton" style={{ display: (finalScore >= 5) ? "block" : "none" }}>
+                <Button href='https://www.google.com/maps/search/consulta+psicologica' target="_blank">Muéstrame las consultas psicológicas cercanas.</Button>
+            </div>
+
             <div id="showResultsContainer" style={{ display: showDetails }}>
                 <div id="resultsTest">
                     <h2>- Test</h2>
@@ -151,8 +139,6 @@ function ResultTestFinal() {
                         </div>
                         <div id="graphicsTestResults">
                             <ResultTestDonut userTestDonut={showTest} />
-                            {/* <ResultTestPolar userTestPolar={userTestResults} /> */}
-                            {/* <ResultTestRadar userTestRadar={userTestResults} /> */}
                         </div>
                     </div>
                 </div>

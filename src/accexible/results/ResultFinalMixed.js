@@ -28,7 +28,7 @@ function ResultFinalMixed(props) {
         }))
         SetArrayDataValue(arrayData.map(function (test, index) {
             return (
-                test.scoreTest + test.scoreChat + test.pronounScoring + test.rumination + test.responseTimeScoring
+                parseFloat(Math.round((test.scoreTest + test.scoreChat + test.pronounScoring + test.rumination + test.responseTimeScoring)* 100) / 100).toFixed(2)
             )
         }))
         setArrayRandomAvgData(arrayData.map(function (test, index) {
