@@ -69,9 +69,16 @@ function Chatbot() {
 
     function Message(props) {
         let textList = props.text.split('&').map(text => {
-            return (
-                <p>{text}</p>
-            )
+            if (text.includes('^')) {
+                return (
+                    <a href={"/results"}>→ VER RESULTADOS ←</a>
+                )
+            }
+            else {
+                return (
+                    <p>{text}</p>
+                )
+            }
         });
 
         return (

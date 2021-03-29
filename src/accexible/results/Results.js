@@ -22,7 +22,6 @@ function Results() {
             <div id="resultsContainer">
                 <h1>Resultados {username}</h1>
                 <ResultTestFinal />
-               
             </div>
         )
     } else {
