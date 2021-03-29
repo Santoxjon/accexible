@@ -51,7 +51,7 @@ function Main() {
                 <Results />
             </Route>
             <Route exact path="/chatbot">
-                {/* <Chatbot /> */}
+                <Chatbot />
             </Route>
         </main>
     )
