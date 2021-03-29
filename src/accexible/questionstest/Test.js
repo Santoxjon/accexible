@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { API_URL } from '../Consts';
-import { Container, ProgressBar } from 'react-bootstrap';
+// import { Container, ProgressBar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Test() {
@@ -21,10 +21,9 @@ function Test() {
     const [backBtn, setBackBtn] = useState(false);
     const [nextBtn, setNextBtn] = useState(false);
     const [userAnswers, setUserAnswers] = useState([]);
+    const [dotList, setDotList] = useState()
     const [testSubmitBtnStatus, setTestSubmitBtnStatus] = useState(true);
     const questionBeginning = "¿Durante las últimas 2 semanas, ¿con qué frecuencia ";
-    const [progress, setProgress] = useState(100);
-    
 
     useEffect(() => {
         function getQuestions() {
@@ -48,8 +47,8 @@ function Test() {
     }, [])
 
     useEffect(() => {
-        setCurrentQuestion(allQuestions[questionIndex].text)
-        setUserAnswers(new Array(allQuestions.length))
+        setCurrentQuestion(allQuestions[questionIndex].text);
+        setUserAnswers(new Array(allQuestions.length).fill(undefined));
     }, [allQuestions])
 
     useEffect(() => {
@@ -64,44 +63,25 @@ function Test() {
             setNextBtn(false);
             setBackBtn(false);
         }
-    }, [questionIndex])
-
-    useEffect(() => {
-        if (userAnswers.length > 0) {
-            console.log(userAnswers);
-        }
-        console.log(Object.values(userAnswers).length, userAnswers.length);
+        
+        setDotList(
+            userAnswers.map((answer, index) => {
+                return (
+                    <div className={`progressDot ${answer ? "filledDot" : ""} ${index === questionIndex ? "activeDot" : ""}`}>
+                        <span>{index + 1}</span>
+                    </div>
+                )
+            })
+        );
         setTestSubmitBtnStatus(userAnswers.includes(undefined));
-
-
-        // if (userAnswers.length === allQuestions.length) {
-        //     setProgress(progress+12)
-        // }
-    }, [userAnswers])
+    }, [questionIndex, userAnswers])
 
     function goBack() {
         setQuestionIndex(questionIndex - 1)
-        setProgress(progress - 13)
     }
     function goNext() {
         setQuestionIndex(questionIndex + 1)
-        setProgress(progress + 13)
     }
-
-    // function BarraProgreso() {
-    //     useEffect(() => {
-    //         if (questionIndex++) {
-    //             setProgress(progress + 100)
-    //             return (
-    //                 <ProgressBar className="contenedorProgreso" now={progress} animated />
-    //             )
-    //         } else if (questionIndex--) {
-    //             setProgress(progress - 100)
-    //         }
-    //     }, [])
-
-    // }
-
 
     function Answers() {
         let listAnswers = allAnswers.map((answer, index) => {
@@ -122,13 +102,20 @@ function Test() {
         )
     }
 
+    function ProgressBar() {
+        return (
+            <div id="dotContainer">
+                {dotList}
+            </div>
+        )
+    }
+
     function HiddenInputs() {
         let listInputs = allQuestions.map((question, index) => {
             return (
                 <Form.Control name={`question${index}`} type="hidden" value={userAnswers[index] === undefined ? "" : userAnswers[index]} required />
             )
         })
-        // console.log(listInputs);
         return (
             listInputs
         )
@@ -158,13 +145,11 @@ function Test() {
                     <div id="testOptionContainer">
                         <Answers />
                     </div>
+                    <ProgressBar />
                     <div id="moveTestBtns">
                         <button id="btnBack" disabled={backBtn} onClick={goBack}>
                             <FontAwesomeIcon icon={faArrowCircleLeft} />
                         </button>
-                        <Container className="contenedorBarra">
-                            <ProgressBar className="contenedorProgreso" now={progress} label={`${questionIndex + 1}/9 preguntas`}/>
-                        </Container>
                         <button id="btnNext" disabled={nextBtn} onClick={goNext}>
                             <FontAwesomeIcon icon={faArrowCircleRight} />
                         </button>
