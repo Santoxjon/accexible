@@ -367,6 +367,7 @@ footer a {
   font-weight: 600;
 }
 
+
 .contenedorProgreso {
   display: flex;
   height: 1rem;
@@ -378,7 +379,13 @@ footer a {
   margin: 1.5rem 0 0 0;
 }
 
-.progress-bar {
+
+.botonConsultas{
+  display:flex;
+  justify-content:center
+}
+
+.progress-bar{
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -14,7 +14,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 function Chatbot() {
     const [userInp, setUserInp] = useState("");
     const [chat, setChat] = useState();
-    const [messages, setMessages] = useState(["Hola! Soy el chatbot 😄 ¿Por qué no empiezas contándome qué tal estás?"]);
+    const [messages, setMessages] = useState(["¡Hola! Soy el chatbot 😄 ¿Por qué no empiezas contándome qué tal estás?"]);
     const [show, setShow] = useState(false);
     const [inputStatus, setInputStatus] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
