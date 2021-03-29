@@ -14,7 +14,7 @@ function ResultTestFinal() {
     const [currentTest, setCurrentTest] = useState("");
     let [fullDate, setFullDate] = useState("");
     let [showTest, setShowTest] = useState("");
-    let finalScore; 
+    let finalScore;
     let [recommend, setRecommend] = useState("");
     let [showDetails, setShowDetails] = useState("none");
 
@@ -71,12 +71,12 @@ function ResultTestFinal() {
     }
 
     /* Recommendations attending final score*/
-    finalScore = parseFloat(Math.round((showTest.scoreTest + showTest.scoreChat+showTest.pronounScoring + showTest.rumination + showTest.responseTimeScoring)* 100) / 100).toFixed(2);
+    finalScore = parseFloat(Math.round((showTest.scoreTest + showTest.scoreChat + showTest.pronounScoring + showTest.rumination + showTest.responseTimeScoring) * 100) / 100).toFixed(2);
 
     useEffect(() => {
         setRecommend("");
         if (finalScore < 5) {
-            setRecommend("No se aprecian rasgos depresivos.");
+            setRecommend("No se aprecian rasgos psicológicos negativos.");
         } else if (finalScore >= 5 && finalScore < 10) {
             setRecommend("Se recomienda consultar con un especialista.")
         } else {
@@ -85,7 +85,7 @@ function ResultTestFinal() {
         setShowDetails("none");
     }, [showTest]);
 
-    /* Manage the details display by the button */ 
+    /* Manage the details display by the button */
     function showDetailsButt() {
         if (showDetails === "none") {
             setShowDetails("block");
@@ -124,6 +124,10 @@ function ResultTestFinal() {
 
             <div id="showDetailsButton">
                 <Button variant="outline-primary" style={{ display: showTest ? "block" : "none" }} onClick={showDetailsButt}>Mostrar Detalles</Button>
+            </div>
+
+            <div id="showConsultsButton" style={{ display: (finalScore >= 5) ? "block" : "none" }}>
+                <Button href='https://www.google.com/maps/search/consulta+psicologica' target="_blank">Muéstrame las consultas psicológicas cercanas.</Button>
             </div>
 
             <div id="showResultsContainer" style={{ display: showDetails }}>
