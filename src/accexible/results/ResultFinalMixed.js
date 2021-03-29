@@ -58,7 +58,7 @@ function ResultFinalMixed(props) {
             },
             {
                 type: 'bar',
-                label: 'Valoracion test',
+                label: 'Valoración test',
                 backgroundColor: "blue",
                 data: arrayDataValue,
                 borderColor: 'white',
@@ -93,7 +93,6 @@ function ResultFinalMixed(props) {
         <div id="graphicLineContainer">
 
             <div id="lineGraphic">
-                {/* <p>Puntuacion Total Valoración (borrar ResultTestLine): {props.userTestLine[0] ? props.userTestLine[0].scoreTest : "Cargando resultados"}</p> */}
                 <Bar data={data} options={options} />
             </div>
 
