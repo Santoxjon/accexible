@@ -70,7 +70,7 @@ function ResultTestFinal() {
             });
     }
 
-    /* Recommendations attending final score*/
+    /* Recommendations attending final score */
     finalScore = parseFloat(Math.round((showTest.scoreTest + showTest.scoreChat + showTest.pronounScoring + showTest.rumination + showTest.responseTimeScoring) * 100) / 100).toFixed(2);
 
     useEffect(() => {
@@ -85,7 +85,7 @@ function ResultTestFinal() {
         setShowDetails("none");
     }, [showTest]);
 
-    /* Manage the details display by the button */
+    /* Manage the details displayed by the button */
     function showDetailsButt() {
         if (showDetails === "none") {
             setShowDetails("block");
@@ -107,13 +107,13 @@ function ResultTestFinal() {
             </div>
             <div id="disclaimerContainer" style={{ display: showTest ? "none" : "block" }}>
                 <h3>Advertencia</h3>
-                <p>Los resultados obtenidos a traves de LiteApp son meramente informativos y aproximados, en ningún caso concluyentes o vinculantes.</p>
-                <p>Para un resultado óptimo le recomendamos que se ponga en contacto con un especialista</p>
+                <p>Los resultados obtenidos a través de LiteApp son meramente informativos y aproximados, en ningún caso concluyentes o vinculantes.</p>
+                <p>Para un resultado óptimo le recomendamos que se ponga en contacto con un especialista.</p>
             </div>
 
             <div id="globalScoreRecommendations" style={{ display: showTest ? "block" : "none" }}>
                 <div id="globalScore">
-                    <h2>Valoracion Global</h2>
+                    <h2>Valoración Global</h2>
                     <h3>{finalScore} pts</h3>
                 </div>
                 <div id="globalRecommendations">
