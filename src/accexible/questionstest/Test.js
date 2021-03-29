@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { API_URL } from '../Consts';
-// import { Container, ProgressBar } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Test() {
@@ -19,7 +18,7 @@ function Test() {
     const [currentQuestion, setCurrentQuestion] = useState("");
     const [questionIndex, setQuestionIndex] = useState(0);
     const [backBtn, setBackBtn] = useState(false);
-    const [nextBtn, setNextBtn] = useState(false);
+    const [nextBtn, setNextBtn] = useState(true);
     const [userAnswers, setUserAnswers] = useState([]);
     const [dotList, setDotList] = useState()
     const [testSubmitBtnStatus, setTestSubmitBtnStatus] = useState(true);
@@ -63,7 +62,7 @@ function Test() {
             setNextBtn(false);
             setBackBtn(false);
         }
-        
+
         setDotList(
             userAnswers.map((answer, index) => {
                 return (
@@ -75,6 +74,15 @@ function Test() {
         );
         setTestSubmitBtnStatus(userAnswers.includes(undefined));
     }, [questionIndex, userAnswers])
+
+    useEffect(() => {
+        if (!userAnswers[questionIndex]) {
+            setNextBtn(true);
+        }
+        else {
+            setNextBtn(false);
+        }
+    }, [questionIndex])
 
     function goBack() {
         setQuestionIndex(questionIndex - 1)
@@ -125,6 +133,7 @@ function Test() {
         let array = [...userAnswers];
         array[questionIndex] = e.target.value;
         setUserAnswers(array);
+        setNextBtn(false);
     }
 
     function relocateToChatbot() {
