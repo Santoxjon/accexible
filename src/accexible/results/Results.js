@@ -3,9 +3,7 @@ import { getCookie } from '../Functions';
 import { Redirect } from 'react-router-dom';
 import { API_URL } from '../Consts';
 
-
-import ResultTest from './ResultTest';
-import ResultChatbot from './ResultChatbot';
+import ResultTestFinal from './ResultTestFinal';
 
 
 function Results() {
@@ -25,10 +23,7 @@ function Results() {
         return (
             <div id="resultsContainer">
                 <h1>Resultados {username}</h1>
-
-                <ResultTest />
-                <ResultChatbot />
-
+                <ResultTestFinal />
             </div>
         )
     } else {
