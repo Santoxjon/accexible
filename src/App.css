@@ -180,6 +180,13 @@ main {
   border-color: #515fc9 transparent transparent transparent;
 }
 
+.msgBot a {
+  color: #fffffe !important;
+  text-decoration: underline;
+  font-weight: 700;
+  font-style: italic;
+}
+
 .msgBot hr {
   border-top: #fffffe solid 1px !important;
 }
@@ -213,7 +220,6 @@ main {
   width: 90%;
   border-radius: .5rem .5rem .5rem 0;
   margin-bottom: .15rem;
-
 }
 
 h1 {
@@ -254,10 +260,10 @@ small {
     transform: scale(1);
   }
   33% {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   66% {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   0% {
     transform: scale(1);
@@ -367,34 +373,49 @@ footer a {
   font-weight: 600;
 }
 
-
-.contenedorProgreso {
+.botonConsultas {
   display: flex;
-  height: 1rem;
-  overflow: hidden;
-  line-height: 0;
-  font-size: .75rem;
-  background-color: #e9ecef;
-  border-radius: .25rem;
-  margin: 1.5rem 0 0 0;
+  justify-content: center
 }
 
-
-.botonConsultas{
-  display:flex;
-  justify-content:center
+#dotContainer {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 
-.progress-bar{
+.progressDot, .filledDot {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #515fc950;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  overflow: hidden;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  background-color: #515fc9 !important;
-  transition: width .6s ease;
+  align-items: center;
+  font-weight: 600;
+  color: #fffffe50;
+}
+
+.filledDot {
+  background-color: #515fc9;
+  color: #fffffe;
+}
+
+.activeDot {
+  animation: growAndShrink infinite .75s;
+}
+
+@keyframes growAndShrink {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Tablet */
