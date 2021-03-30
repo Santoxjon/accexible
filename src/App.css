@@ -60,7 +60,7 @@ main {
   background-size: cover;
 }
 
-#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #chatbotForm, #resultsContainer, #chatbotContainer, #textoIntroductorio {
+#loginForm, #registerForm, #updateForm, #testContainer, #passwordForm, #resultsContainer, #chatbotContainer, #textoIntroductorio {
   background-color: #f8f9fada;
   padding: 1rem .5rem;
   border-radius: 5px;
@@ -385,15 +385,15 @@ footer a {
   width: 100%;
 }
 
-#showConsultsButton{
-  display:flex;
-  justify-content:center;
+#showConsultsButton {
+  display: flex;
+  justify-content: center;
   margin: 1rem 0 0 0;
 }
 
-#showDetailsButton{
-  display:flex;
-  justify-content:center;
+#showDetailsButton {
+  display: flex;
+  justify-content: center;
 }
 
 .progressDot, .filledDot {
@@ -432,7 +432,7 @@ footer a {
 /* Tablet */
 
 @media screen and (min-width: 600px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer, #textoIntroductorio {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #testContainer, #resultsContainer, #textoIntroductorio {
     width: 75%;
     padding: 2rem 1.5rem;
   }
@@ -441,12 +441,15 @@ footer a {
     grid-template-rows: 1fr 1fr;
     gap: 1rem;
   }
+  #chatbotContainer {
+    width: 75%;
+  }
 }
 
 /* TabletXL */
 
 @media screen and (min-width: 768px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer, #textoIntroductorio {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotContainer, #testContainer, #resultsContainer, #textoIntroductorio {
     width: 60%;
   }
 }
@@ -454,7 +457,7 @@ footer a {
 /* PC */
 
 @media screen and (min-width: 922px) {
-  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotForm, #testContainer, #resultsContainer, #textoIntroductorio {
+  #loginForm, #registerForm, #updateForm, #passwordForm, #chatbotContainer, #testContainer, #resultsContainer, #textoIntroductorio {
     width: 45%;
   }
   .navbar-collapse {

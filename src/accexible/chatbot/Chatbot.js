@@ -14,7 +14,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 function Chatbot() {
     const [userInp, setUserInp] = useState("");
     const [chat, setChat] = useState();
-    const [messages, setMessages] = useState(["¡Hola! Soy el chatbot 😄 ¿Por qué no empiezas contándome qué tal estás?"]);
+    const [messages, setMessages] = useState(["¡Hola! Soy AlicIA 😄 ¿Por qué no empiezas contándome qué tal estás?"]);
     const [show, setShow] = useState(false);
     const [inputStatus, setInputStatus] = useState(false);
     const [isWaiting, setIsWaiting] = useState(false);
@@ -27,7 +27,7 @@ function Chatbot() {
     useEffect(() => {
         setChat(messages.map((message, index) => {
             return (
-                <Message author={index % 2 === 1 ? "Tú" : "Chatbot"} authorClass={index % 2 === 1 ? "msgUser" : "msgBot"} text={message} />
+                <Message author={index % 2 === 1 ? "Tú" : "AlicIA"} authorClass={index % 2 === 1 ? "msgUser" : "msgBot"} text={message} />
             )
         }));
         if (messages.length % 2 === 0) {
@@ -118,16 +118,19 @@ function Chatbot() {
             <>
                 <div id="chatbotContainer">
                     <div id="modalContainer">
-                        <h1>Chatbot</h1>
+                        <h1>AlicIA</h1>
                         <Button id="readmeButton" onClick={handleShow}>
-                            Leer antes <FontAwesomeIcon icon={faInfoCircle} />
+                            Información <FontAwesomeIcon icon={faInfoCircle} />
                         </Button>
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
-                                <Modal.Title>Antes de nada...</Modal.Title>
+                                <Modal.Title>Qué es esto?</Modal.Title>
                             </Modal.Header>
-                            <Modal.Body>Aunque puedes hablar con el <b>Chatbot</b> en cualquier momento, desde LiteApp recomendamos realizar primero el <b>Test</b> para ayudar a darte un mejor consejo.
-                            El Chatbot te contestará según tus respuestas. Si le respondes con más detalle, la valoración será más rápida. Si no, realizará más preguntas para poder hacer una valoración más efectiva.
+                            <Modal.Body>
+                                AlicIA es un chatbot que ayuda a detectar posibles trastornos y secuelas por
+                                causa del aislamiento. Tiene en cuenta lo que escribes para que dependiendo
+                                de unas palabras y patrones pueda hacer distintas preguntas y registrar los
+                                pensamientos de la persona con quien 'habla'.
                             </Modal.Body>
                             <Modal.Footer>
                                 <Link to="/Test" class="btn btn-dark">
